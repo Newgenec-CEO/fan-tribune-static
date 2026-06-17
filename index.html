@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fan Tribune — Сидения для трибун и арен</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
+    
+    :root {
+      --primary: 124 58 237;
+    }
+    
+    body {
+      font-family: 'Inter', system_ui, sans-serif;
+      background-color: transparent;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image: url('adds/background-purple-dark-2.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      opacity: 0.13;
+      pointer-events: none;
+    }
+
+    .dark body::before {
+      opacity: 0.10;
+    }
+    
+    .font-display {
+      font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
+      font-feature-settings: "ss02";
+    }
+
+    .product-card {
+      box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.15), 
+                  0 10px 10px -6px rgb(0 0 0 / 0.1);
+    }
+    .dark .product-card {
+      box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4), 
+                  0 10px 10px -6px rgb(0 0 0 / 0.3);
+    }
+
+    html {
+      transition: background-color 0.2s ease;
+    }
+
+    .section-header {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      color: #64748b;
+    }
+    .dark .section-header {
+      color: #64748b;
+    }
+
+    .spec-row {
+      transition: background-color 0.1s ease;
+    }
+    
+    .spec-row:hover {
+      background-color: #f8fafc;
+    }
+    .dark .spec-row:hover {
+      background-color: #1e293b;
+    }
+    .dark .spec-row {
+      border-color: #334155;
+    }
+
+    .advantage-item {
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .advantage-item:hover {
+      transform: translateX(2px);
+    }
+
+    .modern-btn {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .modern-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .modern-btn:active {
+      transform: translateY(0);
+    }
+
+    .product-image {
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                  box-shadow 0.3s ease;
+    }
+    
+    .product-image:hover {
+      transform: scale(1.015);
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    }
+
+    .badge {
+      transition: all 0.2s ease;
+    }
+
+    .preview-card {
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                  box-shadow 0.2s ease;
+    }
+    
+    .preview-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    }
+
+    .nav-link {
+      transition: color 0.1s ease;
+    }
+    
+    .nav-link:hover {
+      color: #4c1d95;
+    }
+    .dark .nav-link:hover {
+      color: #a5b4fc;
+    }
+
+    .product-tab {
+      transition: all 0.2s ease;
+    }
+
+    .product-tab.active {
+      background-color: #4c1d95;
+      color: white;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+  <!-- Unified Header -->
+  <header class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50">
+    <div class="max-w-[1100px] mx-auto px-6 h-[68px] flex items-center justify-between">
+      <div class="flex items-center gap-x-3">
+        <div class="flex items-center justify-center p-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-sm">
+          <img 
+            src="assets/logo/fan_tribune_logo_2-removebg-preview.png" 
+            alt="Fan Tribune" 
+            class="h-10 w-auto"
+          >
+        </div>
+        <span class="font-semibold text-slate-900 dark:text-slate-100 tracking-tight text-xl">fan-tribune</span>
+      </div>
+      
+      <nav class="hidden sm:flex items-center gap-x-8 text-sm font-medium">
+        <a href="#products" class="nav-link text-slate-600 dark:text-slate-400">Продукты</a>
+        <a href="#details" class="nav-link text-slate-600 dark:text-slate-400">Характеристики</a>
+        <a href="#" onclick="showGlobalRequest()" class="nav-link text-slate-600 dark:text-slate-400">Связаться</a>
+      </nav>
+
+      <div class="flex items-center gap-x-3">
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" 
+                onclick="toggleTheme()"
+                class="flex h-9 w-9 items-center justify-center rounded-2xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                aria-label="Переключить тему">
+          <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-600 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
+        <button 
+          onclick="showGlobalRequest()"
+          class="hidden sm:block px-4 py-2 text-sm font-semibold bg-violet-700 hover:bg-violet-800 text-white rounded-2xl transition-colors">
+          Запросить КП
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="max-w-[1100px] mx-auto px-6 pt-14 pb-10">
+    <div class="max-w-2xl">
+      <div class="inline-flex items-center rounded-full bg-violet-100 dark:bg-violet-900/30 dark:text-violet-300 px-4 py-1 text-xs font-semibold tracking-[1px] text-violet-700 mb-4">
+        ПРОФЕССИОНАЛЬНЫЕ СИДЕНИЯ ДЛЯ АРЕН
+      </div>
+      
+      <h1 class="font-display text-5xl sm:text-[56px] leading-[1.05] font-semibold tracking-tighter text-slate-950 dark:text-white">
+        Современные сидения<br>для трибун и стадионов
+      </h1>
+      <p class="mt-5 text-xl text-slate-600 dark:text-slate-400 max-w-md">
+        Модульные и антивандальные решения премиум-класса. 
+        Производим для профессиональных объектов.
+      </p>
+
+      <div class="mt-8 flex flex-col sm:flex-row gap-3">
+        <a href="#products" 
+           class="inline-flex items-center justify-center px-7 py-3.5 bg-slate-900 hover:bg-black text-white font-semibold rounded-2xl text-sm transition-colors">
+          Смотреть продукцию
+        </a>
+        <button onclick="showGlobalRequest()"
+                class="inline-flex items-center justify-center px-7 py-3.5 border border-slate-300 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold rounded-2xl text-sm transition-colors">
+          Запросить коммерческое предложение
+        </button>
+      </div>
+      
+      <div class="mt-6 text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 flex items-center gap-2">
+        <div class="flex -space-x-1">
+          <div class="w-5 h-5 bg-violet-200 rounded-full border border-white"></div>
+          <div class="w-5 h-5 bg-emerald-200 rounded-full border border-white"></div>
+          <div class="w-5 h-5 bg-amber-200 rounded-full border border-white"></div>
+        </div>
+        <span>FIFA / UEFA Compliant • Более 200 объектов</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Lineup / Previews -->
+  <section id="products" class="max-w-[1100px] mx-auto px-6 pb-12">
+    <div class="flex items-end justify-between mb-5 px-1">
+      <div>
+        <div class="section-header mb-1">ПРОДУКТОВАЯ ЛИНЕЙКА</div>
+        <h2 class="text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">Выберите модель</h2>
+      </div>
+      <a href="#details" class="hidden sm:flex items-center text-sm font-medium text-violet-700 dark:text-violet-400 hover:text-violet-800 dark:hover:text-violet-300">
+        Все характеристики <span class="ml-1">↓</span>
+      </a>
+    </div>
+
+    <!-- Row 1: 3 cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mb-5">
+      <!-- LUSZNIKI Preview -->
+      <div onclick="document.getElementById('luzhniki-detail').scrollIntoView({ behavior: 'smooth' })" 
+           class="preview-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 cursor-pointer flex gap-4 hover:border-slate-300 dark:hover:border-slate-700 h-full">
+        <div class="w-20 h-20 flex-shrink-0 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 self-start">
+          <img src="assets/products/luszniki/luszniki_blue_tribune.jpg" 
+               class="w-full h-full object-cover" alt="ЛУЖНИКИ">
+        </div>
+        <div class="flex-1 min-w-0 flex flex-col">
+          <div class="font-semibold text-lg tracking-tight text-slate-900 dark:text-white">ЛУЖНИКИ</div>
+          <div class="text-xs font-semibold text-violet-600 dark:text-violet-400 tracking-wider mt-0.5">КЛАССИЧЕСКАЯ СЕРИЯ</div>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2 line-clamp-2 flex-1 leading-tight">
+            Легендарное сидение стадиона Лужники.
+          </p>
+          <div class="mt-auto text-xs text-violet-700 dark:text-violet-400 font-medium flex items-center">
+            Подробнее →
+          </div>
+        </div>
+      </div>
+
+      <!-- Arena 1 Preview -->
+      <div onclick="document.getElementById('arena-1-detail').scrollIntoView({ behavior: 'smooth' })" 
+           class="preview-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 cursor-pointer flex gap-4 hover:border-slate-300 dark:hover:border-slate-700 h-full">
+        <div class="w-20 h-20 flex-shrink-0 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 self-start">
+          <img src="assets/products/arena-1/arena_main_1.png" 
+               class="w-full h-full object-cover" alt="АРЕНА 1">
+        </div>
+        <div class="flex-1 min-w-0 flex flex-col">
+          <div class="font-semibold text-lg tracking-tight text-slate-900 dark:text-white">АРЕНА 1</div>
+          <div class="text-xs font-semibold text-violet-600 dark:text-violet-400 tracking-wider mt-0.5">БАЗОВАЯ МОДЕЛЬ</div>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2 line-clamp-2 flex-1 leading-tight">
+            Базовая модель серии АРЕНА.
+          </p>
+          <div class="mt-auto text-xs text-violet-700 dark:text-violet-400 font-medium flex items-center">
+            Подробнее →
+          </div>
+        </div>
+      </div>
+
+      <!-- Arena 2 Preview -->
+      <div onclick="document.getElementById('arena-2-detail').scrollIntoView({ behavior: 'smooth' })" 
+           class="preview-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 cursor-pointer flex gap-4 hover:border-slate-300 dark:hover:border-slate-700 h-full">
+        <div class="w-20 h-20 flex-shrink-0 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 self-start">
+          <img src="assets/products/arena-2/arena2_mock_1.png" 
+               class="w-full h-full object-cover" alt="АРЕНА 2">
+        </div>
+        <div class="flex-1 min-w-0 flex flex-col">
+          <div class="font-semibold text-lg tracking-tight text-slate-900 dark:text-white">АРЕНА 2</div>
+          <div class="text-xs font-semibold text-violet-600 dark:text-violet-400 tracking-wider mt-0.5">МОДУЛЬНАЯ СИСТЕМА</div>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2 line-clamp-2 flex-1 leading-tight">
+            Универсальное модульное решение.
+          </p>
+          <div class="mt-auto text-xs text-violet-700 dark:text-violet-400 font-medium flex items-center">
+            Подробнее →
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: 2 cards + placeholder -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+      <!-- Arena 3 Preview -->
+      <div onclick="document.getElementById('arena-detail').scrollIntoView({ behavior: 'smooth' })" 
+           class="preview-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 cursor-pointer flex gap-4 hover:border-slate-300 dark:hover:border-slate-700 h-full">
+        <div class="w-20 h-20 flex-shrink-0 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 self-start">
+          <img src="assets/products/arena-3/Arena3_purple_1.jpeg" 
+               class="w-full h-full object-cover" alt="АРЕНА 3">
+        </div>
+        <div class="flex-1 min-w-0 flex flex-col">
+          <div class="font-semibold text-lg tracking-tight text-slate-900 dark:text-white">АРЕНА 3</div>
+          <div class="text-xs font-semibold text-violet-600 dark:text-violet-400 tracking-wider mt-0.5">МОДУЛЬНАЯ СИСТЕМА</div>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2 line-clamp-2 flex-1 leading-tight">
+            Самое компактное сидение на рынке.
+          </p>
+          <div class="mt-auto text-xs text-violet-700 dark:text-violet-400 font-medium flex items-center">
+            Подробнее →
+          </div>
+        </div>
+      </div>
+
+      <!-- Iskra Preview -->
+      <div onclick="document.getElementById('iskra-detail').scrollIntoView({ behavior: 'smooth' })" 
+           class="preview-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 cursor-pointer flex gap-4 hover:border-slate-300 dark:hover:border-slate-700 h-full">
+        <div class="w-20 h-20 flex-shrink-0 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 self-start">
+          <img src="assets/products/iskra/iskra_front-angle_blue_1.jpg" 
+               class="w-full h-full object-cover" alt="ИСКРА">
+        </div>
+        <div class="flex-1 min-w-0 flex flex-col">
+          <div class="font-semibold text-lg tracking-tight text-slate-900 dark:text-white">ИСКРА</div>
+          <div class="text-xs font-semibold text-violet-600 dark:text-violet-400 tracking-wider mt-0.5">ПРЕМИУМ СИДЕНИЕ</div>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2 line-clamp-2 flex-1 leading-tight">
+            Премиум антивандальное сидение.
+          </p>
+          <div class="mt-auto text-xs text-violet-700 dark:text-violet-400 font-medium flex items-center">
+            Подробнее →
+          </div>
+        </div>
+      </div>
+
+      <!-- Placeholder stub -->
+      <div class="preview-card bg-white/60 dark:bg-slate-900/60 border border-dashed border-slate-300 dark:border-slate-700 rounded-3xl p-5 flex items-center justify-center h-full opacity-70">
+        <div class="text-center">
+          <div class="text-5xl font-bold text-slate-400 dark:text-slate-500 mb-1">#</div>
+          <div class="text-xs text-slate-500 dark:text-slate-400 tracking-wider">СКОРО</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed Products Section -->
+  <section id="details" class="max-w-[1100px] mx-auto px-6 pb-16">
+    <div class="mb-6 px-1">
+      <div class="section-header mb-1">ПОДРОБНАЯ ИНФОРМАЦИЯ</div>
+      <h2 class="text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">Характеристики и преимущества</h2>
+    </div>
+
+    <!-- LUSZNIKI Full Card -->
+    <div id="luzhniki-detail" class="scroll-mt-20 mb-10">
+      <div class="bg-white dark:bg-slate-900 rounded-3xl product-card border border-slate-200 dark:border-slate-700 overflow-hidden">
+        <div class="p-7 sm:p-9">
+          
+          <!-- Product Header -->
+          <div class="mb-2">
+            <div class="inline-flex items-center rounded-full bg-violet-50 px-3 py-1 text-xs font-semibold tracking-[1px] text-violet-700 mb-3">
+              КЛАССИЧЕСКАЯ СЕРИЯ
+            </div>
+            <h3 class="font-display text-4xl sm:text-5xl leading-none font-semibold tracking-tighter text-slate-950 dark:text-white">
+              ЛУЖНИКИ
+            </h3>
+          </div>
+
+          <p class="text-[15.5px] leading-relaxed text-slate-600 dark:text-slate-400 max-w-[46ch]">
+            Легендарное сидение, созданное для знаменитого стадиона Лужники. 
+            Классика, проверенная десятилетиями на крупнейших объектах.
+          </p>
+
+          <!-- Image Gallery Carousel -->
+          <div class="mt-7 mb-2">
+            <div id="luzhniki-carousel" class="relative rounded-2xl overflow-hidden shadow-lg border border-slate-100 dark:border-slate-700">
+              <div id="luzhniki-slides-container" class="relative w-full aspect-[16/9.6] bg-slate-100 dark:bg-slate-800">
+                <!-- Slides populated by JS -->
+              </div>
+
+              <!-- Left Button -->
+              <button onclick="prevLuzhnikiSlide()" 
+                      class="absolute left-3 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 dark:bg-slate-900/90 text-slate-700 dark:text-white shadow hover:bg-white dark:hover:bg-slate-800 transition">
+                <span class="text-xl leading-none">←</span>
+              </button>
+
+              <!-- Right Button -->
+              <button onclick="nextLuzhnikiSlide()" 
+                      class="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 dark:bg-slate-900/90 text-slate-700 dark:text-white shadow hover:bg-white dark:hover:bg-slate-800 transition">
+                <span class="text-xl leading-none">→</span>
+              </button>
+
+              <!-- Counter / Badge -->
+              <div class="absolute bottom-3 left-3 z-10 flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1 text-xs text-white">
+                <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></div>
+                <span id="luzhniki-slide-counter">1 / 5</span>
+                <span class="ml-1 tracking-wider">FIFA COMPLIANT</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Advantages -->
+          <div class="mt-8">
+            <div class="section-header mb-3.5 px-0.5">КЛЮЧЕВЫЕ ПРЕИМУЩЕСТВА</div>
+            <ul class="space-y-[11px]">
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Проверенная десятилетиями конструкция — эталон надежности</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Усиленное крепление и высокая устойчивость к вандализму</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Отличная защита от УФ и погодных условий</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Простота обслуживания и уборки на крупных объектах</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Полная совместимость с металлоконструкциями Arena</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Specs -->
+          <div class="mt-8">
+            <div class="section-header mb-3 px-0.5">ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ</div>
+            <div class="rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden text-[14.2px]">
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Материал</span>
+                <span class="font-semibold text-slate-900 dark:text-white">Полипропилен с УФ-добавками</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Шаг посадочного места</span>
+                <span class="font-semibold text-slate-900 dark:text-white">480 мм</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Ударная прочность</span>
+                <span class="font-semibold text-slate-900 dark:text-white">135 ДАН</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Гарантия цвета</span>
+                <span class="font-semibold text-slate-900 dark:text-white">5 лет</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px]">
+                <span class="text-slate-500 dark:text-slate-400">Класс горючести</span>
+                <span class="font-semibold text-slate-900 dark:text-white">UL 94 V2</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <div class="section-header mb-2 px-0.5">ИДЕАЛЬНО ДЛЯ</div>
+            <p class="text-[14.8px] leading-snug text-slate-600 dark:text-slate-400">
+              Крупных стадионов, исторических арен, объектов с высокой проходимостью 
+              и профессиональных спортивных комплексов.
+            </p>
+          </div>
+
+          <!-- Badges -->
+          <div class="mt-7 flex flex-wrap gap-2">
+            <div class="badge inline-flex items-center gap-1.5 px-3 py-1 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2" /></svg>
+              <span>Модульность</span>
+            </div>
+            <div class="badge inline-flex items-center gap-1.5 px-3 py-1 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M4 8V4m0 4h4m-4 4v4m0-4h4m4-8v4m0-4h4m-4 4v4m0-4h4" /></svg>
+              <span>Компактность</span>
+            </div>
+            <div class="badge inline-flex items-center gap-1.5 px-3 py-1 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M12 8v4l3 3m6-3a9 9 0 01-9 9 9 9 0 01-9-9 9 9 0 019-9 9 9 0 019 9z" /></svg>
+              <span>Быстрый монтаж</span>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button onclick="requestOffer('luzhniki')" 
+                    class="modern-btn w-full px-6 py-[15px] bg-violet-700 hover:bg-violet-800 active:bg-violet-900 text-white text-sm font-semibold rounded-2xl shadow-sm flex items-center justify-center gap-2">
+              Запросить коммерческое предложение
+            </button>
+            <button onclick="showMoreInfo('luzhniki')" 
+                    class="modern-btn w-full px-6 py-[15px] border border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 active:bg-slate-100 text-slate-700 dark:text-slate-200 font-semibold text-sm rounded-2xl flex items-center justify-center gap-2 transition-colors">
+              Подробнее о продукте
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ARENA 1 Full Card -->
+    <div id="arena-1-detail" class="scroll-mt-20 mb-10">
+      <div class="bg-white dark:bg-slate-900 rounded-3xl product-card border border-slate-200 dark:border-slate-700 overflow-hidden">
+        <div class="p-7 sm:p-9">
+          
+          <!-- Product Header -->
+          <div class="mb-2">
+            <div class="inline-flex items-center rounded-full bg-violet-50 px-3 py-1 text-xs font-semibold tracking-[1px] text-violet-700 mb-3">
+              БАЗОВАЯ МОДЕЛЬ
+            </div>
+            <h3 class="font-display text-4xl sm:text-5xl leading-none font-semibold tracking-tighter text-slate-950 dark:text-white">
+              АРЕНА 1
+            </h3>
+          </div>
+
+          <p class="text-[15.5px] leading-relaxed text-slate-600 dark:text-slate-400 max-w-[46ch]">
+            Базовая модель легендарной серии АРЕНА. Простая, надежная и экономичная 
+            конструкция для любых трибун.
+          </p>
+
+          <!-- Image Gallery Carousel -->
+          <div class="mt-7 mb-2">
+            <div id="arena-1-carousel" class="relative rounded-2xl overflow-hidden shadow-lg border border-slate-100 dark:border-slate-700">
+              <div id="arena-1-slides-container" class="relative w-full aspect-[16/9.6] bg-slate-100 dark:bg-slate-800">
+                <!-- Slides populated by JS -->
+              </div>
+
+              <!-- Left Button -->
+              <button onclick="prevArena1Slide()" 
+                      class="absolute left-3 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 dark:bg-slate-900/90 text-slate-700 dark:text-white shadow hover:bg-white dark:hover:bg-slate-800 transition">
+                <span class="text-xl leading-none">←</span>
+              </button>
+
+              <!-- Right Button -->
+              <button onclick="nextArena1Slide()" 
+                      class="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 dark:bg-slate-900/90 text-slate-700 dark:text-white shadow hover:bg-white dark:hover:bg-slate-800 transition">
+                <span class="text-xl leading-none">→</span>
+              </button>
+
+              <!-- Counter / Badge -->
+              <div class="absolute bottom-3 left-3 z-10 flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1 text-xs text-white">
+                <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></div>
+                <span id="arena-1-slide-counter">1 / 5</span>
+                <span class="ml-1 tracking-wider">FIFA COMPLIANT</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Advantages -->
+          <div class="mt-8">
+            <div class="section-header mb-3.5 px-0.5">КЛЮЧЕВЫЕ ПРЕИМУЩЕСТВА</div>
+            <ul class="space-y-[11px]">
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Простая и надежная модульная система</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Высокая прочность и долговечность конструкции</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Быстрый и простой монтаж на направляющие</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">УФ-защита и стойкость к внешним воздействиям</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Оптимальное соотношение цены и качества</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Specs -->
+          <div class="mt-8">
+            <div class="section-header mb-3 px-0.5">ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ</div>
+            <div class="rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden text-[14.2px]">
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Материал</span>
+                <span class="font-semibold text-slate-900 dark:text-white">Полипропилен с УФ-добавками</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Шаг посадочного места</span>
+                <span class="font-semibold text-slate-900 dark:text-white">480 мм</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Ударная прочность</span>
+                <span class="font-semibold text-slate-900 dark:text-white">125 ДАН</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Гарантия цвета</span>
+                <span class="font-semibold text-slate-900 dark:text-white">5 лет</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px]">
+                <span class="text-slate-500 dark:text-slate-400">Класс горючести</span>
+                <span class="font-semibold text-slate-900 dark:text-white">UL 94 V2</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <div class="section-header mb-2 px-0.5">ИДЕАЛЬНО ДЛЯ</div>
+            <p class="text-[14.8px] leading-snug text-slate-600 dark:text-slate-400">
+              Спортивных объектов, учебных заведений, муниципальных трибун 
+              и объектов с ограниченным бюджетом.
+            </p>
+          </div>
+
+          <!-- Badges -->
+          <div class="mt-7 flex flex-wrap gap-2">
+            <div class="badge inline-flex items-center gap-1.5 px-3 py-1 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2" /></svg>
+              <span>Модульность</span>
+            </div>
+            <div class="badge inline-flex items-center gap-1.5 px-3 py-1 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M4 8V4m0 4h4m-4 4v4m0-4h4m4-8v4m0-4h4m-4 4v4m0-4h4" /></svg>
+              <span>Компактность</span>
+            </div>
+            <div class="badge inline-flex items-center gap-1.5 px-3 py-1 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M12 8v4l3 3m6-3a9 9 0 01-9 9 9 9 0 01-9-9 9 9 0 019-9 9 9 0 019 9z" /></svg>
+              <span>Быстрый монтаж</span>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button onclick="requestOffer('arena1')" 
+                    class="modern-btn w-full px-6 py-[15px] bg-violet-700 hover:bg-violet-800 active:bg-violet-900 text-white text-sm font-semibold rounded-2xl shadow-sm flex items-center justify-center gap-2">
+              Запросить коммерческое предложение
+            </button>
+            <button onclick="showMoreInfo('arena1')" 
+                    class="modern-btn w-full px-6 py-[15px] border border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 active:bg-slate-100 text-slate-700 dark:text-slate-200 font-semibold text-sm rounded-2xl flex items-center justify-center gap-2 transition-colors">
+              Подробнее о продукте
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ARENA 2 Full Card -->
+    <div id="arena-2-detail" class="scroll-mt-20 mb-10">
+      <div class="bg-white dark:bg-slate-900 rounded-3xl product-card border border-slate-200 dark:border-slate-700 overflow-hidden">
+        <div class="p-7 sm:p-9">
+          
+          <!-- Product Header -->
+          <div class="mb-2">
+            <div class="inline-flex items-center rounded-full bg-violet-50 px-3 py-1 text-xs font-semibold tracking-[1px] text-violet-700 mb-3">
+              МОДУЛЬНАЯ СИСТЕМА
+            </div>
+            <h3 class="font-display text-4xl sm:text-5xl leading-none font-semibold tracking-tighter text-slate-950 dark:text-white">
+              АРЕНА 2
+            </h3>
+          </div>
+
+          <p class="text-[15.5px] leading-relaxed text-slate-600 dark:text-slate-400 max-w-[46ch]">
+            Проверенное модульное сидение для трибун. Универсальное решение 
+            с отличным балансом прочности, комфорта и стоимости.
+          </p>
+
+          <!-- Image Gallery Carousel -->
+          <div class="mt-7 mb-2">
+            <div id="arena-2-carousel" class="relative rounded-2xl overflow-hidden shadow-lg border border-slate-100 dark:border-slate-700">
+              <div id="arena-2-slides-container" class="relative w-full aspect-[16/9.6] bg-slate-100 dark:bg-slate-800">
+                <!-- Slides populated by JS -->
+              </div>
+
+              <!-- Left Button -->
+              <button onclick="prevArena2Slide()" 
+                      class="absolute left-3 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 dark:bg-slate-900/90 text-slate-700 dark:text-white shadow hover:bg-white dark:hover:bg-slate-800 transition">
+                <span class="text-xl leading-none">←</span>
+              </button>
+
+              <!-- Right Button -->
+              <button onclick="nextArena2Slide()" 
+                      class="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 dark:bg-slate-900/90 text-slate-700 dark:text-white shadow hover:bg-white dark:hover:bg-slate-800 transition">
+                <span class="text-xl leading-none">→</span>
+              </button>
+
+              <!-- Counter / Badge -->
+              <div class="absolute bottom-3 left-3 z-10 flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1 text-xs text-white">
+                <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></div>
+                <span id="arena-2-slide-counter">1 / 5</span>
+                <span class="ml-1 tracking-wider">FIFA COMPLIANT</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Advantages -->
+          <div class="mt-8">
+            <div class="section-header mb-3.5 px-0.5">КЛЮЧЕВЫЕ ПРЕИМУЩЕСТВА</div>
+            <ul class="space-y-[11px]">
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Модульная конструкция — простая замена отдельных сидений</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Высокая ударопрочность и устойчивость к интенсивной эксплуатации</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">УФ-защита и стабилизация цвета — гарантия 5 лет</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Эргономичная форма сиденья для комфорта зрителей</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Совместимость с направляющими системы Arena</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Specs -->
+          <div class="mt-8">
+            <div class="section-header mb-3 px-0.5">ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ</div>
+            <div class="rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden text-[14.2px]">
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Материал</span>
+                <span class="font-semibold text-slate-900 dark:text-white">Полипропилен с УФ-добавками</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Шаг посадочного места</span>
+                <span class="font-semibold text-slate-900 dark:text-white">480 мм</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Ударная прочность</span>
+                <span class="font-semibold text-slate-900 dark:text-white">140 ДАН</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Гарантия цвета</span>
+                <span class="font-semibold text-slate-900 dark:text-white">5 лет</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px]">
+                <span class="text-slate-500 dark:text-slate-400">Класс горючести</span>
+                <span class="font-semibold text-slate-900 dark:text-white">UL 94 V2</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <div class="section-header mb-2 px-0.5">ИДЕАЛЬНО ДЛЯ</div>
+            <p class="text-[14.8px] leading-snug text-slate-600 dark:text-slate-400">
+              Стадионов, спортивных комплексов, концертных площадок, 
+              учебных заведений и многоцелевых трибун.
+            </p>
+          </div>
+
+          <!-- Badges -->
+          <div class="mt-7 flex flex-wrap gap-2">
+            <div class="badge inline-flex items-center gap-1.5 px-3 py-1 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2" /></svg>
+              <span>Модульность</span>
+            </div>
+            <div class="badge inline-flex items-center gap-1.5 px-3 py-1 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M4 8V4m0 4h4m-4 4v4m0-4h4m4-8v4m0-4h4m-4 4v4m0-4h4" /></svg>
+              <span>Компактность</span>
+            </div>
+            <div class="badge inline-flex items-center gap-1.5 px-3 py-1 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M12 8v4l3 3m6-3a9 9 0 01-9 9 9 9 0 01-9-9 9 9 0 019-9 9 9 0 019 9z" /></svg>
+              <span>Быстрый монтаж</span>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button onclick="requestOffer('arena2')" 
+                    class="modern-btn w-full px-6 py-[15px] bg-violet-700 hover:bg-violet-800 active:bg-violet-900 text-white text-sm font-semibold rounded-2xl shadow-sm flex items-center justify-center gap-2">
+              Запросить коммерческое предложение
+            </button>
+            <button onclick="showMoreInfo('arena2')" 
+                    class="modern-btn w-full px-6 py-[15px] border border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 active:bg-slate-100 text-slate-700 dark:text-slate-200 font-semibold text-sm rounded-2xl flex items-center justify-center gap-2 transition-colors">
+              Подробнее о продукте
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ARENA 3 Full Card -->
+    <div id="arena-detail" class="scroll-mt-20 mb-10">
+      <div class="bg-white dark:bg-slate-900 rounded-3xl product-card border border-slate-200 dark:border-slate-700 overflow-hidden">
+        <div class="p-7 sm:p-9">
+          
+          <!-- Product Header -->
+          <div class="mb-2">
+            <div class="inline-flex items-center rounded-full bg-violet-50 px-3 py-1 text-xs font-semibold tracking-[1px] text-violet-700 mb-3">
+              МОДУЛЬНАЯ СИСТЕМА
+            </div>
+            <h3 class="font-display text-4xl sm:text-5xl leading-none font-semibold tracking-tighter text-slate-950 dark:text-white">
+              АРЕНА 3
+            </h3>
+          </div>
+
+          <p class="text-[15.5px] leading-relaxed text-slate-600 dark:text-slate-400 max-w-[46ch]">
+            Самое компактное сидение в сложенном виде на рынке. 
+            Модульная система из высокопрочного полипропилена для современных трибун и арен.
+          </p>
+
+          <!-- Image Gallery Carousel -->
+          <div class="mt-7 mb-2">
+            <div id="arena-3-carousel" class="relative rounded-2xl overflow-hidden shadow-lg border border-slate-100 dark:border-slate-700">
+              <div id="arena-3-slides-container" class="relative w-full aspect-[16/9.6] bg-slate-100 dark:bg-slate-800">
+                <!-- Slides populated by JS -->
+              </div>
+
+              <!-- Left Button -->
+              <button onclick="prevArena3Slide()" 
+                      class="absolute left-3 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 dark:bg-slate-900/90 text-slate-700 dark:text-white shadow hover:bg-white dark:hover:bg-slate-800 transition">
+                <span class="text-xl leading-none">←</span>
+              </button>
+
+              <!-- Right Button -->
+              <button onclick="nextArena3Slide()" 
+                      class="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 dark:bg-slate-900/90 text-slate-700 dark:text-white shadow hover:bg-white dark:hover:bg-slate-800 transition">
+                <span class="text-xl leading-none">→</span>
+              </button>
+
+              <!-- Counter / Badge -->
+              <div class="absolute bottom-3 left-3 z-10 flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1 text-xs text-white">
+                <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></div>
+                <span id="arena-3-slide-counter">1 / 6</span>
+                <span class="ml-1 tracking-wider">FIFA COMPLIANT</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Advantages -->
+          <div class="mt-8">
+            <div class="section-header mb-3.5 px-0.5">КЛЮЧЕВЫЕ ПРЕИМУЩЕСТВА</div>
+            <ul class="space-y-[11px]">
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Максимально компактное в сложенном виде — больше пространства для прохода зрителей</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Модульная система — замена любого сидения за секунды без демонтажа конструкции</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Скрытый крепёж и корпус из стеклонаполненного полимера повышенной прочности</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Установка на единую систему направляющих вместе со всей линейкой АРЕНА</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">УФ-защита и стабилизация цвета с гарантией 5 лет</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Specs -->
+          <div class="mt-8">
+            <div class="section-header mb-3 px-0.5">ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ</div>
+            <div class="rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden text-[14.2px]">
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Материал</span>
+                <span class="font-semibold text-slate-900 dark:text-white">Полипропилен + стеклонаполненный полимер</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Шаг посадочного места</span>
+                <span class="font-semibold text-slate-900 dark:text-white">480 мм</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Ударная прочность</span>
+                <span class="font-semibold text-slate-900 dark:text-white">150 ДАН</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Гарантия цвета</span>
+                <span class="font-semibold text-slate-900 dark:text-white">5 лет</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px]">
+                <span class="text-slate-500 dark:text-slate-400">Класс горючести</span>
+                <span class="font-semibold text-slate-900 dark:text-white">UL 94 V2</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <div class="section-header mb-2 px-0.5">ИДЕАЛЬНО ДЛЯ</div>
+            <p class="text-[14.8px] leading-snug text-slate-600">
+              Стадионов и спортивных арен, концертных залов, фанатских секторов, 
+              мобильных и стационарных трибун.
+            </p>
+          </div>
+
+          <!-- Badges -->
+          <div class="mt-7 flex flex-wrap gap-2">
+            <div class="badge inline-flex items-center gap-1.5 px-3 py-1 rounded-2xl bg-slate-100 dark:bg-slate-800 dark:text-slate-300 text-slate-700 text-xs font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2" /></svg>
+              <span>Модульность</span>
+            </div>
+            <div class="badge inline-flex items-center gap-1.5 px-3 py-1 rounded-2xl bg-slate-100 dark:bg-slate-800 dark:text-slate-300 text-slate-700 text-xs font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M4 8V4m0 4h4m-4 4v4m0-4h4m4-8v4m0-4h4m-4 4v4m0-4h4" /></svg>
+              <span>Компактность</span>
+            </div>
+            <div class="badge inline-flex items-center gap-1.5 px-3 py-1 rounded-2xl bg-slate-100 dark:bg-slate-800 dark:text-slate-300 text-slate-700 text-xs font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M12 8v4l3 3m6-3a9 9 0 01-9 9 9 9 0 01-9-9 9 9 0 019-9 9 9 0 019 9z" /></svg>
+              <span>Быстрый монтаж</span>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button onclick="requestOffer('arena')" 
+                    class="modern-btn w-full px-6 py-[15px] bg-violet-700 hover:bg-violet-800 active:bg-violet-900 text-white text-sm font-semibold rounded-2xl shadow-sm flex items-center justify-center gap-2">
+              Запросить коммерческое предложение
+            </button>
+            <button onclick="showMoreInfo('arena')" 
+                    class="modern-btn w-full px-6 py-[15px] border border-slate-300 hover:border-slate-400 hover:bg-slate-50 active:bg-slate-100 text-slate-700 font-semibold text-sm rounded-2xl flex items-center justify-center gap-2 transition-colors">
+              Подробнее о продукте
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ISKRA Full Card -->
+    <div id="iskra-detail" class="scroll-mt-20">
+      <div class="bg-white dark:bg-slate-900 rounded-3xl product-card border border-slate-200 dark:border-slate-700 overflow-hidden">
+        <div class="p-7 sm:p-9">
+          
+          <!-- Product Header -->
+          <div class="mb-2">
+            <div class="inline-flex items-center rounded-full bg-violet-50 px-3 py-1 text-xs font-semibold tracking-[1px] text-violet-700 mb-3">
+              ПРЕМИУМ СИДЕНИЕ
+            </div>
+            <h3 class="font-display text-4xl sm:text-5xl leading-none font-semibold tracking-tighter text-slate-950 dark:text-white">
+              ИСКРА
+            </h3>
+          </div>
+
+          <p class="text-[15.5px] leading-relaxed text-slate-600 dark:text-slate-400 max-w-[46ch]">
+            Многофункциональное сидение премиум-класса с матовой текстурой шагрень. 
+            Максимально устойчивое к вандализму за счёт 4-точечного крепления.
+          </p>
+
+          <!-- Image Gallery Carousel -->
+          <div class="mt-7 mb-2">
+            <div id="iskra-carousel" class="relative rounded-2xl overflow-hidden shadow-lg border border-slate-100 dark:border-slate-700">
+              <div id="iskra-slides-container" class="relative w-full aspect-[16/9.6] bg-slate-100 dark:bg-slate-800">
+                <!-- Slides populated by JS -->
+              </div>
+
+              <!-- Left Button -->
+              <button onclick="prevIskraSlide()" 
+                      class="absolute left-3 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 dark:bg-slate-900/90 text-slate-700 dark:text-white shadow hover:bg-white dark:hover:bg-slate-800 transition">
+                <span class="text-xl leading-none">←</span>
+              </button>
+
+              <!-- Right Button -->
+              <button onclick="nextIskraSlide()" 
+                      class="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 dark:bg-slate-900/90 text-slate-700 dark:text-white shadow hover:bg-white dark:hover:bg-slate-800 transition">
+                <span class="text-xl leading-none">→</span>
+              </button>
+
+              <!-- Counter / Badge -->
+              <div class="absolute bottom-3 left-3 z-10 flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1 text-xs text-white">
+                <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></div>
+                <span id="iskra-slide-counter">1 / 6</span>
+                <span class="ml-1 tracking-wider">FIFA / UEFA COMPLIANT</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Advantages -->
+          <div class="mt-8">
+            <div class="section-header mb-3.5 px-0.5">КЛЮЧЕВЫЕ ПРЕИМУЩЕСТВА</div>
+            <ul class="space-y-[11px]">
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Центральное дренажное отверстие — постоянный слив воды</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Отсутствие зазоров — простота обслуживания и уборки</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Скрытая крепежная фурнитура — эстетичный внешний вид</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">УФ-защита и стабилизация цвета — гарантия 5 лет</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Работа при температурах от −40°C до +60°C</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Specs -->
+          <div class="mt-8">
+            <div class="section-header mb-3 px-0.5">ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ</div>
+            <div class="rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden text-[14.2px]">
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Материал</span>
+                <span class="font-semibold text-slate-900 dark:text-white">Полипропилен с УФ-добавками</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Размеры (В×Ш×Г)</span>
+                <span class="font-semibold text-slate-900 dark:text-white">428 × 480 × 750 мм</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Крепление</span>
+                <span class="font-semibold text-slate-900 dark:text-white">4 болта Ø8 мм</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px] border-b border-slate-100 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Ударная прочность</span>
+                <span class="font-semibold text-slate-900 dark:text-white">150 ДАН</span>
+              </div>
+              <div class="spec-row flex justify-between items-center px-4 py-[10px]">
+                <span class="text-slate-500 dark:text-slate-400">Гарантия цвета / Класс горючести</span>
+                <span class="font-semibold text-slate-900 dark:text-white">5 лет / UL 94 V2</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <div class="section-header mb-2 px-0.5">ИДЕАЛЬНО ДЛЯ</div>
+            <p class="text-[14.8px] leading-snug text-slate-600">
+              Фанатских секторов, зон за воротами, объектов с высокой антивандальной нагрузкой, 
+              открытых стадионов и крытых арен.
+            </p>
+          </div>
+
+          <!-- Badges -->
+          <div class="mt-7 flex flex-wrap gap-2">
+            <div class="badge inline-flex items-center gap-1.5 px-3 py-1 rounded-2xl bg-slate-100 dark:bg-slate-800 dark:text-slate-300 text-slate-700 text-xs font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2" /></svg>
+              <span>Модульность</span>
+            </div>
+            <div class="badge inline-flex items-center gap-1.5 px-3 py-1 rounded-2xl bg-slate-100 dark:bg-slate-800 dark:text-slate-300 text-slate-700 text-xs font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M4 8V4m0 4h4m-4 4v4m0-4h4m4-8v4m0-4h4m-4 4v4m0-4h4" /></svg>
+              <span>Компактность</span>
+            </div>
+            <div class="badge inline-flex items-center gap-1.5 px-3 py-1 rounded-2xl bg-slate-100 dark:bg-slate-800 dark:text-slate-300 text-slate-700 text-xs font-semibold">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M12 8v4l3 3m6-3a9 9 0 01-9 9 9 9 0 01-9-9 9 9 0 019-9 9 9 0 019 9z" /></svg>
+              <span>Быстрый монтаж</span>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button onclick="requestOffer('iskra')" 
+                    class="modern-btn w-full px-6 py-[15px] bg-violet-700 hover:bg-violet-800 active:bg-violet-900 text-white text-sm font-semibold rounded-2xl shadow-sm flex items-center justify-center gap-2">
+              Запросить коммерческое предложение
+            </button>
+            <button onclick="showMoreInfo('iskra')" 
+                    class="modern-btn w-full px-6 py-[15px] border border-slate-300 hover:border-slate-400 hover:bg-slate-50 active:bg-slate-100 text-slate-700 font-semibold text-sm rounded-2xl flex items-center justify-center gap-2 transition-colors">
+              Подробнее о продукте
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simple CTA Footer -->
+  <div class="border-t dark:border-slate-800 bg-white dark:bg-slate-900">
+    <div class="max-w-[1100px] mx-auto px-6 py-9 text-center">
+      <h3 class="text-lg font-semibold text-slate-800 dark:text-white">Нужна помощь с выбором или расчётом проекта?</h3>
+      <p class="text-slate-600 dark:text-slate-400 mt-1">Наши специалисты подготовят индивидуальное коммерческое предложение.</p>
+      <button onclick="showGlobalRequest()" 
+              class="mt-5 px-8 py-3 bg-violet-700 hover:bg-violet-800 text-white font-semibold rounded-2xl text-sm transition-colors">
+        Отправить запрос менеджеру
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-sm px-5 py-3 rounded-2xl shadow-xl items-center gap-2 z-[999]">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-emerald-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+    <span id="toast-text">Запрос отправлен. Менеджер свяжется с вами.</span>
+  </div>
+
+  <script>
+    // Tailwind config + Theme handling
+    function initializeTailwind() {
+      tailwind.config = {
+        darkMode: 'class'
+      };
+      document.documentElement.style.setProperty('--accent', '124 58 237');
+    }
+
+    // Theme management
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark');
+        updateThemeIcon(true);
+      } else {
+        document.documentElement.classList.remove('dark');
+        updateThemeIcon(false);
+      }
+    }
+
+    function updateThemeIcon(isDark) {
+      const icon = document.getElementById('theme-icon');
+      if (!icon) return;
+      
+      if (isDark) {
+        // Moon icon for light mode (click to switch to light)
+        icon.innerHTML = `
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+        `;
+      } else {
+        // Sun / moon for dark
+        icon.innerHTML = `
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        `;
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      updateThemeIcon(isDark);
+    }
+
+    // Product-specific request offer
+    function requestOffer(product) {
+      const toast = document.getElementById('toast');
+      const toastText = document.getElementById('toast-text');
+      
+      let productName = 'ЛУЖНИКИ';
+      if (product === 'arena') productName = 'АРЕНА 3';
+      else if (product === 'iskra') productName = 'ИСКРА';
+      else if (product === 'arena2') productName = 'АРЕНА 2';
+      else if (product === 'arena1') productName = 'АРЕНА 1';
+      toastText.textContent = `Запрос по ${productName} отправлен. Менеджер свяжется с вами.`;
+      
+      toast.classList.remove('hidden');
+      toast.classList.add('flex');
+      
+      setTimeout(() => {
+        toast.classList.remove('flex');
+        toast.classList.add('hidden');
+      }, 3800);
+    }
+
+    // Show more info modal
+    function showMoreInfo(product) {
+      let title = 'ЛУЖНИКИ';
+      let subtitle = 'Классическое решение для трибун';
+      if (product === 'arena') {
+        title = 'АРЕНА 3';
+        subtitle = 'Модульное решение для трибун';
+      } else if (product === 'iskra') {
+        title = 'ИСКРА';
+        subtitle = 'Премиум сидение для трибун';
+      } else if (product === 'arena2') {
+        title = 'АРЕНА 2';
+        subtitle = 'Модульное решение для трибун';
+      } else if (product === 'arena1') {
+        title = 'АРЕНА 1';
+        subtitle = 'Базовая модель серии АРЕНА';
+      }
+      
+      const modal = document.createElement('div');
+      modal.className = `fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4`;
+      
+      modal.innerHTML = `
+        <div onclick="event.target.remove()" class="absolute inset-0"></div>
+        <div onclick="event.stopImmediatePropagation()" 
+             class="relative bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-8 shadow-2xl">
+          <div class="flex justify-between items-start mb-5">
+            <div>
+              <div class="font-semibold text-2xl tracking-tight">${title}</div>
+              <div class="text-violet-600 dark:text-violet-400 text-sm font-medium tracking-wide">${subtitle}</div>
+            </div>
+            <button onclick="this.closest('.fixed').remove()" 
+                    class="w-9 h-9 flex items-center justify-center text-slate-400 dark:text-slate-500 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800 -mr-1">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6h12v12" /></svg>
+            </button>
+          </div>
+          
+          <div class="space-y-4 text-[14.5px] text-slate-600 dark:text-slate-400 leading-relaxed">
+            ${product === 'arena' ? 
+              `<p>АРЕНА 3 — компактная модульная система сидений, созданная с применением технологии газового литья под давлением.</p>
+               <p>Предназначена для профессиональных стадионов, арен и многофункциональных пространств. Обеспечивает максимальную плотность посадки при сохранении комфорта и безопасности.</p>` : 
+              product === 'iskra' ?
+              `<p>ИСКРА — многофункциональное сидение премиум-класса с матовой текстурной поверхностью (шагрень) и элегантной формой.</p>
+               <p>Технология литья под давлением с газом обеспечивает непревзойденную прочность. 4-точечная система крепления делает сидение максимально устойчивым к вандализму.</p>` :
+              product === 'arena2' ?
+              `<p>АРЕНА 2 — проверенное модульное сидение для трибун с отличным соотношением цены и качества.</p>
+               <p>Универсальное решение для большинства спортивных объектов. Обеспечивает надежность, комфорт и простоту монтажа.</p>` :
+              product === 'arena1' ?
+              `<p>АРЕНА 1 — базовая модель серии АРЕНА. Простая и надежная конструкция.</p>
+               <p>Экономичное решение для любых трибун с хорошими эксплуатационными характеристиками.</p>` :
+              `<p>ЛУЖНИКИ — легендарное сидение, разработанное специально для знаменитого стадиона Лужники.</p>
+               <p>Классическое решение, проверенное временем на крупнейших объектах. Высокая прочность и простота эксплуатации.</p>`
+            }
+            
+            <div class="pt-2">
+              <div class="text-xs font-semibold tracking-[1px] text-slate-400 mb-2">ДОСТУПНЫЕ ОПЦИИ ЦВЕТОВ</div>
+              <div class="flex flex-wrap gap-2 text-xs">
+                ${product === 'arena' ? 
+                  `<div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Фиолетовый</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Красный</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Синий</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Серый</div>` :
+                  product === 'iskra' ?
+                  `<div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Красный (RAL 3020)</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Синий</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Серый</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Зелёный</div>` :
+                  product === 'arena2' ?
+                  `<div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Красный</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Синий</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Серый</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Оранжевый</div>` :
+                  product === 'arena1' ?
+                  `<div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Красный</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Синий</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Зелёный</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Серый</div>` :
+                  `<div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Красный</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Синий</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Жёлтый</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Серый</div>`
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-6 mt-6 border-t flex flex-col gap-3">
+            <div class="flex gap-3">
+              <button onclick="this.closest('.fixed').remove(); viewSpec('${product}');" 
+                      class="flex-1 py-3 text-sm font-semibold bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 dark:text-slate-200 rounded-2xl flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                Смотреть спецификацию
+              </button>
+              <button onclick="downloadSpec('${product}');" 
+                      class="flex-1 py-3 text-sm font-semibold bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 dark:text-slate-200 rounded-2xl flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Скачать PDF
+              </button>
+            </div>
+            <button onclick="this.closest('.fixed').remove(); requestOffer('${product}')" 
+                    class="w-full py-3 text-sm font-semibold bg-violet-700 hover:bg-violet-800 text-white rounded-2xl">
+              Запросить КП
+            </button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    function getPdfFilename(product) {
+      const pdfMap = {
+        'iskra': 'ISKRA.pdf',
+        'arena': 'ARENA_3_SPEC.pdf',
+        'arena2': 'ARENA_2_SPEC.pdf',
+        'arena1': 'ARENA_1_SPEC.pdf',
+        'luzhniki': 'LUSZNIKI.pdf'
+      };
+      return pdfMap[product] || 'ISKRA.pdf';
+    }
+
+    function viewSpec(product) {
+      const filename = getPdfFilename(product);
+      window.open(`assets/pdfs/${filename}`, '_blank');
+    }
+
+    function downloadSpec(product) {
+      const filename = getPdfFilename(product);
+      const url = `assets/pdfs/${filename}`;
+
+      // Robust download that works in most environments (including local file://)
+      // Prefer Blob method to avoid PDF viewer navigation
+      const downloadWithBlob = () => {
+        fetch(url)
+          .then(res => {
+            if (!res.ok) throw new Error('Fetch failed');
+            return res.blob();
+          })
+          .then(blob => {
+            const objectUrl = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = objectUrl;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(objectUrl);
+          })
+          .catch(() => {
+            // Last resort fallback
+            forceDownloadAnchor(url, filename);
+          });
+      };
+
+      const forceDownloadAnchor = (url, filename) => {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        // Small delay to ensure click is processed before removal in some browsers
+        setTimeout(() => {
+          document.body.removeChild(a);
+        }, 100);
+      };
+
+      // Start with blob method
+      downloadWithBlob();
+    }
+
+    // Global request CTA
+    function showGlobalRequest() {
+      const modal = document.createElement('div');
+      modal.className = `fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4`;
+      modal.innerHTML = `
+        <div onclick="event.target.remove()" class="absolute inset-0"></div>
+        <div onclick="event.stopImmediatePropagation()" 
+             class="relative bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-8 shadow-2xl">
+          <div class="flex justify-between items-center mb-4">
+            <div class="font-semibold text-2xl tracking-tight text-slate-900 dark:text-white">Запрос коммерческого предложения</div>
+            <button onclick="this.closest('.fixed').remove()" 
+                    class="w-9 h-9 flex items-center justify-center text-slate-400 hover:text-slate-600 rounded-2xl hover:bg-slate-100">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6h12v12" /></svg>
+            </button>
+          </div>
+          <p class="text-slate-600 text-sm mb-6">Заполните форму, и наш менеджер свяжется с вами в течение рабочего дня.</p>
+          
+          <form onsubmit="submitGlobalForm(event, this)">
+            <div class="space-y-4">
+              <div>
+                <label class="text-xs font-medium text-slate-500 dark:text-slate-400 dark:text-slate-400">Ваше имя</label>
+                <input type="text" required class="mt-1 w-full border border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-2xl px-4 py-2.5 text-sm" placeholder="Иван Иванов">
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="text-xs font-medium text-slate-500 dark:text-slate-400 dark:text-slate-400">Компания</label>
+                  <input type="text" class="mt-1 w-full border border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-2xl px-4 py-2.5 text-sm" placeholder="ООО «Стадион»">
+                </div>
+                <div>
+                  <label class="text-xs font-medium text-slate-500 dark:text-slate-400 dark:text-slate-400">Телефон</label>
+                  <input type="tel" class="mt-1 w-full border border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-2xl px-4 py-2.5 text-sm" placeholder="+7 (999) 000-00-00">
+                </div>
+              </div>
+              <div>
+                <label class="text-xs font-medium text-slate-500 dark:text-slate-400 dark:text-slate-400">Email</label>
+                <input type="email" required class="mt-1 w-full border border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-2xl px-4 py-2.5 text-sm" placeholder="email@company.ru">
+              </div>
+              <div>
+                <label class="text-xs font-medium text-slate-500 dark:text-slate-400 dark:text-slate-400">Интересующая модель (необязательно)</label>
+                <select class="mt-1 w-full border border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-2xl px-4 py-2.5 text-sm">
+                  <option>ЛУЖНИКИ</option>
+                  <option>АРЕНА 1</option>
+                  <option>АРЕНА 2</option>
+                  <option>АРЕНА 3</option>
+                  <option>ИСКРА</option>
+                  <option>Несколько моделей / не определился</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="pt-6 flex gap-3">
+              <button type="button" onclick="this.closest('.fixed').remove()" 
+                      class="flex-1 py-3 text-sm font-semibold border border-slate-300 dark:border-slate-700 dark:text-slate-200 rounded-2xl">Отмена</button>
+              <button type="submit" 
+                      class="flex-1 py-3 text-sm font-semibold bg-violet-700 hover:bg-violet-800 text-white rounded-2xl">Отправить запрос</button>
+            </div>
+          </form>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    function submitGlobalForm(e, form) {
+      e.preventDefault();
+      const modal = form.closest('.fixed');
+      modal.remove();
+      
+      const toast = document.getElementById('toast');
+      const toastText = document.getElementById('toast-text');
+      toastText.textContent = 'Спасибо! Запрос получен. Мы свяжемся с вами скоро.';
+      toast.classList.remove('hidden');
+      toast.classList.add('flex');
+      
+      setTimeout(() => {
+        toast.classList.remove('flex');
+        toast.classList.add('hidden');
+      }, 4000);
+    }
+
+    // Keyboard support
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const modals = document.querySelectorAll('.fixed.inset-0');
+        if (modals.length) modals[modals.length - 1].remove();
+      }
+    });
+
+    // ISKRA Gallery Carousel
+    const iskraImages = [
+      'assets/products/iskra/iskra_front-angle_blue_1.jpg',
+      'assets/products/iskra/iskra_front-angle_blue_2.jpg',
+      'assets/products/iskra/iskra_main_mock_red.png',
+      'assets/products/iskra/iskra_mock_side_1.jpg',
+      'assets/products/iskra/iskra_mock_side_3.jpg',
+      'assets/products/iskra/iskra_tribune_0.jpg',
+      'assets/products/iskra/iskra_tribune_1.jpg'
+    ];
+    let iskraCurrentIndex = 0;
+
+    function renderIskraSlides() {
+      const container = document.getElementById('iskra-slides-container');
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      iskraImages.forEach((src, index) => {
+        const slide = document.createElement('div');
+        slide.className = `absolute inset-0 transition-opacity duration-300 ${index === iskraCurrentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'}`;
+        slide.innerHTML = `
+          <img src="${src}" 
+               alt="ИСКРА — фото ${index + 1}" 
+               class="w-full h-full object-cover">
+          <div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/40 to-transparent"></div>
+        `;
+        container.appendChild(slide);
+      });
+
+      updateIskraCounter();
+    }
+
+    function updateIskraCounter() {
+      const counter = document.getElementById('iskra-slide-counter');
+      if (counter) {
+        counter.textContent = `${iskraCurrentIndex + 1} / ${iskraImages.length}`;
+      }
+    }
+
+    function showIskraSlide(index) {
+      const container = document.getElementById('iskra-slides-container');
+      if (!container) return;
+
+      const slides = container.children;
+      if (!slides.length) return;
+
+      // Hide all
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove('opacity-100', 'z-10');
+        slides[i].classList.add('opacity-0', 'z-0');
+      }
+
+      iskraCurrentIndex = (index + iskraImages.length) % iskraImages.length;
+
+      const active = slides[iskraCurrentIndex];
+      active.classList.remove('opacity-0', 'z-0');
+      active.classList.add('opacity-100', 'z-10');
+
+      updateIskraCounter();
+    }
+
+    function nextIskraSlide() {
+      showIskraSlide(iskraCurrentIndex + 1);
+    }
+
+    function prevIskraSlide() {
+      showIskraSlide(iskraCurrentIndex - 1);
+    }
+
+    // Initialize Iskra carousel after DOM ready
+    function initIskraCarousel() {
+      const container = document.getElementById('iskra-slides-container');
+      if (container) {
+        renderIskraSlides();
+        // Auto advance optional - disabled for user control
+      }
+    }
+
+    // LUZHNIKI Gallery Carousel
+    const luzhnikiImages = [
+      'assets/products/luszniki/LUSZNIKI_default_main.jpg',
+      'assets/products/luszniki/luszniki_blue_tribune.jpg',
+      'assets/products/luszniki/luszniki_blue_tribune_2.jpg',
+      'assets/products/luszniki/luszniki_yellow_tribune.jpg',
+      'assets/products/luszniki/luszniki_colors_random.jpg'
+    ];
+    let luzhnikiCurrentIndex = 0;
+
+    function renderLuzhnikiSlides() {
+      const container = document.getElementById('luzhniki-slides-container');
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      luzhnikiImages.forEach((src, index) => {
+        const slide = document.createElement('div');
+        slide.className = `absolute inset-0 transition-opacity duration-300 ${index === luzhnikiCurrentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'}`;
+        slide.innerHTML = `
+          <img src="${src}" 
+               alt="ЛУЖНИКИ — фото ${index + 1}" 
+               class="w-full h-full object-cover">
+          <div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/40 to-transparent"></div>
+        `;
+        container.appendChild(slide);
+      });
+
+      updateLuzhnikiCounter();
+    }
+
+    function updateLuzhnikiCounter() {
+      const counter = document.getElementById('luzhniki-slide-counter');
+      if (counter) {
+        counter.textContent = `${luzhnikiCurrentIndex + 1} / ${luzhnikiImages.length}`;
+      }
+    }
+
+    function showLuzhnikiSlide(index) {
+      const container = document.getElementById('luzhniki-slides-container');
+      if (!container) return;
+
+      const slides = container.children;
+      if (!slides.length) return;
+
+      // Hide all
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove('opacity-100', 'z-10');
+        slides[i].classList.add('opacity-0', 'z-0');
+      }
+
+      luzhnikiCurrentIndex = (index + luzhnikiImages.length) % luzhnikiImages.length;
+
+      const active = slides[luzhnikiCurrentIndex];
+      active.classList.remove('opacity-0', 'z-0');
+      active.classList.add('opacity-100', 'z-10');
+
+      updateLuzhnikiCounter();
+    }
+
+    function nextLuzhnikiSlide() {
+      showLuzhnikiSlide(luzhnikiCurrentIndex + 1);
+    }
+
+    function prevLuzhnikiSlide() {
+      showLuzhnikiSlide(luzhnikiCurrentIndex - 1);
+    }
+
+    // Initialize Luzhniki carousel after DOM ready
+    function initLuzhnikiCarousel() {
+      const container = document.getElementById('luzhniki-slides-container');
+      if (container) {
+        renderLuzhnikiSlides();
+      }
+    }
+
+    // ARENA 1 Gallery Carousel
+    const arena1Images = [
+      'assets/products/arena-1/arena_main_1.png',
+      'assets/products/arena-1/arena_main_2.png',
+      'assets/products/arena-1/arena_side_3.png',
+      'assets/products/arena-1/arena_tribune_4.png',
+      'assets/products/arena-1/arena_tribune_5.png'
+    ];
+    let arena1CurrentIndex = 0;
+
+    function renderArena1Slides() {
+      const container = document.getElementById('arena-1-slides-container');
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      arena1Images.forEach((src, index) => {
+        const slide = document.createElement('div');
+        slide.className = `absolute inset-0 transition-opacity duration-300 ${index === arena1CurrentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'}`;
+        slide.innerHTML = `
+          <img src="${src}" 
+               alt="АРЕНА 1 — фото ${index + 1}" 
+               class="w-full h-full object-cover">
+          <div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/40 to-transparent"></div>
+        `;
+        container.appendChild(slide);
+      });
+
+      updateArena1Counter();
+    }
+
+    function updateArena1Counter() {
+      const counter = document.getElementById('arena-1-slide-counter');
+      if (counter) {
+        counter.textContent = `${arena1CurrentIndex + 1} / ${arena1Images.length}`;
+      }
+    }
+
+    function showArena1Slide(index) {
+      const container = document.getElementById('arena-1-slides-container');
+      if (!container) return;
+
+      const slides = container.children;
+      if (!slides.length) return;
+
+      // Hide all
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove('opacity-100', 'z-10');
+        slides[i].classList.add('opacity-0', 'z-0');
+      }
+
+      arena1CurrentIndex = (index + arena1Images.length) % arena1Images.length;
+
+      const active = slides[arena1CurrentIndex];
+      active.classList.remove('opacity-0', 'z-0');
+      active.classList.add('opacity-100', 'z-10');
+
+      updateArena1Counter();
+    }
+
+    function nextArena1Slide() {
+      showArena1Slide(arena1CurrentIndex + 1);
+    }
+
+    function prevArena1Slide() {
+      showArena1Slide(arena1CurrentIndex - 1);
+    }
+
+    // Initialize Arena 1 carousel after DOM ready
+    function initArena1Carousel() {
+      const container = document.getElementById('arena-1-slides-container');
+      if (container) {
+        renderArena1Slides();
+      }
+    }
+
+    // ARENA 2 Gallery Carousel
+    const arena2Images = [
+      'assets/products/arena-2/arena2_mock_1.png',
+      'assets/products/arena-2/arena2_mock_2.png',
+      'assets/products/arena-2/arena2_mock_3.png',
+      'assets/products/arena-2/photo_arena_2_1.jpg',
+      'assets/products/arena-2/photo_arena_2_2.jpg'
+    ];
+    let arena2CurrentIndex = 0;
+
+    function renderArena2Slides() {
+      const container = document.getElementById('arena-2-slides-container');
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      arena2Images.forEach((src, index) => {
+        const slide = document.createElement('div');
+        slide.className = `absolute inset-0 transition-opacity duration-300 ${index === arena2CurrentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'}`;
+        slide.innerHTML = `
+          <img src="${src}" 
+               alt="АРЕНА 2 — фото ${index + 1}" 
+               class="w-full h-full object-cover">
+          <div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/40 to-transparent"></div>
+        `;
+        container.appendChild(slide);
+      });
+
+      updateArena2Counter();
+    }
+
+    function updateArena2Counter() {
+      const counter = document.getElementById('arena-2-slide-counter');
+      if (counter) {
+        counter.textContent = `${arena2CurrentIndex + 1} / ${arena2Images.length}`;
+      }
+    }
+
+    function showArena2Slide(index) {
+      const container = document.getElementById('arena-2-slides-container');
+      if (!container) return;
+
+      const slides = container.children;
+      if (!slides.length) return;
+
+      // Hide all
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove('opacity-100', 'z-10');
+        slides[i].classList.add('opacity-0', 'z-0');
+      }
+
+      arena2CurrentIndex = (index + arena2Images.length) % arena2Images.length;
+
+      const active = slides[arena2CurrentIndex];
+      active.classList.remove('opacity-0', 'z-0');
+      active.classList.add('opacity-100', 'z-10');
+
+      updateArena2Counter();
+    }
+
+    function nextArena2Slide() {
+      showArena2Slide(arena2CurrentIndex + 1);
+    }
+
+    function prevArena2Slide() {
+      showArena2Slide(arena2CurrentIndex - 1);
+    }
+
+    // Initialize Arena 2 carousel after DOM ready
+    function initArena2Carousel() {
+      const container = document.getElementById('arena-2-slides-container');
+      if (container) {
+        renderArena2Slides();
+      }
+    }
+
+    // ARENA 3 Gallery Carousel
+    const arena3Images = [
+      'assets/products/arena-3/Arena3_purple_1.jpeg',
+      'assets/products/arena-3/Arena3_tribune_0.png',
+      'assets/products/arena-3/Arena3_tribune_1.png',
+      'assets/products/arena-3/arena3_mock_1.jpg',
+      'assets/products/arena-3/arena3_mock_2.jpg',
+      'assets/products/arena-3/arena3_mock_3.jpg'
+    ];
+    let arena3CurrentIndex = 0;
+
+    function renderArena3Slides() {
+      const container = document.getElementById('arena-3-slides-container');
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      arena3Images.forEach((src, index) => {
+        const slide = document.createElement('div');
+        slide.className = `absolute inset-0 transition-opacity duration-300 ${index === arena3CurrentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'}`;
+        slide.innerHTML = `
+          <img src="${src}" 
+               alt="АРЕНА 3 — фото ${index + 1}" 
+               class="w-full h-full object-cover">
+          <div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/40 to-transparent"></div>
+        `;
+        container.appendChild(slide);
+      });
+
+      updateArena3Counter();
+    }
+
+    function updateArena3Counter() {
+      const counter = document.getElementById('arena-3-slide-counter');
+      if (counter) {
+        counter.textContent = `${arena3CurrentIndex + 1} / ${arena3Images.length}`;
+      }
+    }
+
+    function showArena3Slide(index) {
+      const container = document.getElementById('arena-3-slides-container');
+      if (!container) return;
+
+      const slides = container.children;
+      if (!slides.length) return;
+
+      // Hide all
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove('opacity-100', 'z-10');
+        slides[i].classList.add('opacity-0', 'z-0');
+      }
+
+      arena3CurrentIndex = (index + arena3Images.length) % arena3Images.length;
+
+      const active = slides[arena3CurrentIndex];
+      active.classList.remove('opacity-0', 'z-0');
+      active.classList.add('opacity-100', 'z-10');
+
+      updateArena3Counter();
+    }
+
+    function nextArena3Slide() {
+      showArena3Slide(arena3CurrentIndex + 1);
+    }
+
+    function prevArena3Slide() {
+      showArena3Slide(arena3CurrentIndex - 1);
+    }
+
+    // Initialize Arena 3 carousel after DOM ready
+    function initArena3Carousel() {
+      const container = document.getElementById('arena-3-slides-container');
+      if (container) {
+        renderArena3Slides();
+      }
+    }
+
+    // Boot
+    window.onload = function() {
+      initializeTailwind();
+      initTheme();
+      // Initialize galleries
+      setTimeout(() => {
+        initIskraCarousel();
+        initLuzhnikiCarousel();
+        initArena1Carousel();
+        initArena2Carousel();
+        initArena3Carousel();
+      }, 100);
+    }
+  </script>
+</body>
+</html>
