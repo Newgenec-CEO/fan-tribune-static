@@ -341,7 +341,7 @@
       <div onclick="document.getElementById('iskra-detail').scrollIntoView({ behavior: 'smooth' })" 
            class="preview-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 cursor-pointer flex gap-4 hover:border-slate-300 dark:hover:border-slate-700 h-full">
         <div class="w-20 h-20 flex-shrink-0 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 self-start">
-          <img src="assets/products/iskra/iskra_front-angle_blue_1.jpg" 
+          <img src="assets/products/iskra/iskra_mock_side_3.jpg" 
                class="w-full h-full object-cover" alt="ИСКРА">
         </div>
         <div class="flex-1 min-w-0 flex flex-col">
@@ -1094,23 +1094,7 @@
 
     // Product-specific request offer
     function requestOffer(product) {
-      const toast = document.getElementById('toast');
-      const toastText = document.getElementById('toast-text');
-      
-      let productName = 'ЛУЖНИКИ';
-      if (product === 'arena') productName = 'АРЕНА 3';
-      else if (product === 'iskra') productName = 'ИСКРА';
-      else if (product === 'arena2') productName = 'АРЕНА 2';
-      else if (product === 'arena1') productName = 'АРЕНА 1';
-      toastText.textContent = `Запрос по ${productName} отправлен. Менеджер свяжется с вами.`;
-      
-      toast.classList.remove('hidden');
-      toast.classList.add('flex');
-      
-      setTimeout(() => {
-        toast.classList.remove('flex');
-        toast.classList.add('hidden');
-      }, 3800);
+      showGlobalRequest(product);
     }
 
     function getProductSpecsHtml(product) {
@@ -1233,7 +1217,7 @@
             </div>
             <button onclick="this.closest('.fixed').remove()" 
                     class="w-9 h-9 flex items-center justify-center text-slate-400 dark:text-slate-500 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800 -mr-1">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6h12v12" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
           </div>
           
@@ -1305,7 +1289,7 @@
                 Скачать PDF
               </button>
             </div>
-            <button onclick="this.closest('.fixed').remove(); requestOffer('${product}')" 
+            <button onclick="this.closest('.fixed').remove(); showGlobalRequest('${product}')" 
                     class="w-full py-3 text-sm font-semibold bg-violet-700 hover:bg-violet-800 dark:bg-violet-600 dark:hover:bg-violet-500 text-white rounded-2xl">
               Запросить КП
             </button>
@@ -1377,7 +1361,7 @@
     }
 
     // Global request CTA
-    function showGlobalRequest() {
+    function showGlobalRequest(product) {
       const modal = document.createElement('div');
       modal.className = `fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4`;
       modal.innerHTML = `
@@ -1388,7 +1372,7 @@
             <div class="font-semibold text-2xl tracking-tight text-slate-900 dark:text-white">Запрос коммерческого предложения</div>
             <button onclick="this.closest('.fixed').remove()" 
                     class="w-9 h-9 flex items-center justify-center text-slate-400 hover:text-slate-600 rounded-2xl hover:bg-slate-100">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6h12v12" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
           </div>
           <p class="text-slate-600 text-sm mb-6">Заполните форму, и наш менеджер свяжется с вами в течение рабочего дня.</p>
@@ -1436,6 +1420,20 @@
         </div>
       `;
       document.body.appendChild(modal);
+
+      if (product) {
+        const productMap = {
+          luzhniki: 'ЛУЖНИКИ',
+          arena1: 'АРЕНА 1',
+          arena2: 'АРЕНА 2',
+          arena: 'АРЕНА 3',
+          iskra: 'ИСКРА'
+        };
+        const select = modal.querySelector('select');
+        if (select && productMap[product]) {
+          select.value = productMap[product];
+        }
+      }
     }
 
     function submitGlobalForm(e, form) {
@@ -1465,11 +1463,10 @@
 
     // ISKRA Gallery Carousel
     const iskraImages = [
-      'assets/products/iskra/iskra_front-angle_blue_1.jpg',
+      'assets/products/iskra/iskra_mock_side_3.jpg',
       'assets/products/iskra/iskra_front-angle_blue_2.jpg',
       'assets/products/iskra/iskra_main_mock_red.png',
       'assets/products/iskra/iskra_mock_side_1.jpg',
-      'assets/products/iskra/iskra_mock_side_3.jpg',
       'assets/products/iskra/iskra_tribune_0.jpg',
       'assets/products/iskra/iskra_tribune_1.jpg'
     ];
