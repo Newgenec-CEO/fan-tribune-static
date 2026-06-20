@@ -18,11 +18,15 @@
       background-color: transparent;
     }
 
+    .dark body {
+      background-color: #1e293b;
+    }
+
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      z-index: -1;
+      z-index: -2;
       background-image: url('adds/background-purple-dark-2.jpg');
       background-size: cover;
       background-position: center;
@@ -33,7 +37,16 @@
     }
 
     .dark body::before {
-      opacity: 0.10;
+      opacity: 0.11;
+    }
+
+    .dark body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: rgba(30, 41, 59, 0.55);
+      pointer-events: none;
     }
     
     .font-display {
@@ -155,9 +168,14 @@
       <div class="flex items-center gap-x-3">
         <div class="flex items-center justify-center p-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-sm">
           <img 
-            src="assets/logo/fan_tribune_logo_2-removebg-preview.png" 
+            src="assets/logo/fan-tribune-logo-dark-crop-2.png" 
             alt="Fan Tribune" 
-            class="h-10 w-auto"
+            class="h-10 w-auto block dark:hidden"
+          >
+          <img 
+            src="assets/logo/fan-tribune-logo-light-crop-2.png" 
+            alt="Fan Tribune" 
+            class="h-10 w-auto hidden dark:block"
           >
         </div>
         <span class="font-semibold text-slate-900 dark:text-slate-100 tracking-tight text-xl">fan-tribune</span>
@@ -196,26 +214,26 @@
         ПРОФЕССИОНАЛЬНЫЕ СИДЕНИЯ ДЛЯ АРЕН
       </div>
       
-      <h1 class="font-display text-5xl sm:text-[56px] leading-[1.05] font-semibold tracking-tighter text-slate-950 dark:text-white">
+      <h1 class="font-display text-5xl sm:text-[56px] leading-[1.05] font-semibold tracking-tighter text-slate-950 dark:text-white dark:drop-shadow-sm">
         Современные сидения<br>для трибун и стадионов
       </h1>
-      <p class="mt-5 text-xl text-slate-600 dark:text-slate-400 max-w-md">
+      <p class="mt-5 text-xl text-slate-600 dark:text-slate-300 max-w-md">
         Модульные и антивандальные решения премиум-класса. 
         Производим для профессиональных объектов.
       </p>
 
       <div class="mt-8 flex flex-col sm:flex-row gap-3">
         <a href="#products" 
-           class="inline-flex items-center justify-center px-7 py-3.5 bg-slate-900 hover:bg-black text-white font-semibold rounded-2xl text-sm transition-colors">
+           class="inline-flex items-center justify-center px-7 py-3.5 bg-slate-900 hover:bg-black dark:bg-violet-600 dark:hover:bg-violet-500 text-white font-semibold rounded-2xl text-sm transition-colors">
           Смотреть продукцию
         </a>
         <button onclick="showGlobalRequest()"
-                class="inline-flex items-center justify-center px-7 py-3.5 border border-slate-300 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold rounded-2xl text-sm transition-colors">
+                class="inline-flex items-center justify-center px-7 py-3.5 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 active:bg-slate-100 dark:active:bg-slate-600 text-slate-700 dark:text-slate-100 font-semibold rounded-2xl text-sm transition-colors">
           Запросить коммерческое предложение
         </button>
       </div>
       
-      <div class="mt-6 text-xs text-slate-500 dark:text-slate-400 dark:text-slate-400 flex items-center gap-2">
+      <div class="mt-6 text-xs text-slate-500 dark:text-slate-300 flex items-center gap-2">
         <div class="flex -space-x-1">
           <div class="w-5 h-5 bg-violet-200 rounded-full border border-white"></div>
           <div class="w-5 h-5 bg-emerald-200 rounded-full border border-white"></div>
@@ -411,66 +429,45 @@
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Проверенная десятилетиями конструкция — эталон надежности</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Модульность / замена сидений — низкая</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Усиленное крепление и высокая устойчивость к вандализму</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Компактность в сложенном виде — средняя</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Отличная защита от УФ и погодных условий</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Система направляющих — своя</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Простота обслуживания и уборки на крупных объектах</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Антивандальность — хорошая</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Полная совместимость с металлоконструкциями Arena</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Возможность полумягких накладок — нет</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Возможность подлокотников — опционально</span>
               </li>
             </ul>
-          </div>
-
-          <!-- Specs -->
-          <div class="mt-5">
-            <div class="section-header mb-2 px-0.5">ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ</div>
-            <div class="rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden text-[14.2px]">
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Материал</span>
-                <span class="font-semibold text-slate-900 dark:text-white">Полипропилен с УФ-добавками</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Шаг посадочного места</span>
-                <span class="font-semibold text-slate-900 dark:text-white">480 мм</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Ударная прочность</span>
-                <span class="font-semibold text-slate-900 dark:text-white">135 ДАН</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Гарантия цвета</span>
-                <span class="font-semibold text-slate-900 dark:text-white">5 лет</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2">
-                <span class="text-slate-500 dark:text-slate-400">Класс горючести</span>
-                <span class="font-semibold text-slate-900 dark:text-white">UL 94 V2</span>
-              </div>
-            </div>
           </div>
 
           <div class="mt-5">
             <div class="section-header mb-2 px-0.5">ИДЕАЛЬНО ДЛЯ</div>
             <p class="text-[14.8px] leading-snug text-slate-600 dark:text-slate-400">
-              Крупных стадионов, исторических арен, объектов с высокой проходимостью 
+              Крупных стадионов, исторических арен, объектов с высокой проходимостью
               и профессиональных спортивных комплексов.
             </p>
           </div>
@@ -494,11 +491,11 @@
           <!-- Buttons -->
           <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button onclick="requestOffer('luzhniki')" 
-                    class="modern-btn w-full px-6 py-3 bg-violet-700 hover:bg-violet-800 active:bg-violet-900 text-white text-sm font-semibold rounded-2xl shadow-sm flex items-center justify-center gap-2">
+                    class="modern-btn w-full px-6 py-3 bg-violet-700 hover:bg-violet-800 active:bg-violet-900 dark:bg-violet-600 dark:hover:bg-violet-500 dark:active:bg-violet-700 text-white text-sm font-semibold rounded-2xl shadow-sm flex items-center justify-center gap-2">
               Запросить коммерческое предложение
             </button>
             <button onclick="showMoreInfo('luzhniki')" 
-                    class="modern-btn w-full px-6 py-3 border border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 active:bg-slate-100 text-slate-700 dark:text-slate-200 font-semibold text-sm rounded-2xl flex items-center justify-center gap-2 transition-colors">
+                    class="modern-btn w-full px-6 py-3 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 active:bg-slate-100 dark:active:bg-slate-600 text-slate-700 dark:text-slate-100 font-semibold text-sm rounded-2xl flex items-center justify-center gap-2 transition-colors">
               Подробнее о продукте
             </button>
           </div>
@@ -563,66 +560,45 @@
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Простая и надежная модульная система</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Модульность / замена сидений — средняя</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Высокая прочность и долговечность конструкции</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Компактность в сложенном виде — средняя</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Быстрый и простой монтаж на направляющие</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Система направляющих — совместима с Лужники</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">УФ-защита и стойкость к внешним воздействиям</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Антивандальность — хорошая</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Оптимальное соотношение цены и качества</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Возможность полумягких накладок — нет</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Возможность подлокотников — опционально</span>
               </li>
             </ul>
-          </div>
-
-          <!-- Specs -->
-          <div class="mt-5">
-            <div class="section-header mb-2 px-0.5">ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ</div>
-            <div class="rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden text-[14.2px]">
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Материал</span>
-                <span class="font-semibold text-slate-900 dark:text-white">Полипропилен с УФ-добавками</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Шаг посадочного места</span>
-                <span class="font-semibold text-slate-900 dark:text-white">480 мм</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Ударная прочность</span>
-                <span class="font-semibold text-slate-900 dark:text-white">125 ДАН</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Гарантия цвета</span>
-                <span class="font-semibold text-slate-900 dark:text-white">5 лет</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2">
-                <span class="text-slate-500 dark:text-slate-400">Класс горючести</span>
-                <span class="font-semibold text-slate-900 dark:text-white">UL 94 V2</span>
-              </div>
-            </div>
           </div>
 
           <div class="mt-5">
             <div class="section-header mb-2 px-0.5">ИДЕАЛЬНО ДЛЯ</div>
             <p class="text-[14.8px] leading-snug text-slate-600 dark:text-slate-400">
-              Спортивных объектов, учебных заведений, муниципальных трибун 
+              Спортивных объектов, учебных заведений, муниципальных трибун
               и объектов с ограниченным бюджетом.
             </p>
           </div>
@@ -646,11 +622,11 @@
           <!-- Buttons -->
           <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button onclick="requestOffer('arena1')" 
-                    class="modern-btn w-full px-6 py-3 bg-violet-700 hover:bg-violet-800 active:bg-violet-900 text-white text-sm font-semibold rounded-2xl shadow-sm flex items-center justify-center gap-2">
+                    class="modern-btn w-full px-6 py-3 bg-violet-700 hover:bg-violet-800 active:bg-violet-900 dark:bg-violet-600 dark:hover:bg-violet-500 dark:active:bg-violet-700 text-white text-sm font-semibold rounded-2xl shadow-sm flex items-center justify-center gap-2">
               Запросить коммерческое предложение
             </button>
             <button onclick="showMoreInfo('arena1')" 
-                    class="modern-btn w-full px-6 py-3 border border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 active:bg-slate-100 text-slate-700 dark:text-slate-200 font-semibold text-sm rounded-2xl flex items-center justify-center gap-2 transition-colors">
+                    class="modern-btn w-full px-6 py-3 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 active:bg-slate-100 dark:active:bg-slate-600 text-slate-700 dark:text-slate-100 font-semibold text-sm rounded-2xl flex items-center justify-center gap-2 transition-colors">
               Подробнее о продукте
             </button>
           </div>
@@ -715,66 +691,45 @@
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Модульная конструкция — простая замена отдельных сидений</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Модульность / замена сидений — высокая</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Высокая ударопрочность и устойчивость к интенсивной эксплуатации</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Компактность в сложенном виде — хорошая</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">УФ-защита и стабилизация цвета — гарантия 5 лет</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Система направляющих — единая для всей серии АРЕНА</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Эргономичная форма сиденья для комфорта зрителей</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Антивандальность — очень хорошая</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Совместимость с направляющими системы Arena</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Возможность полумягких накладок — есть</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Возможность подлокотников — базовый + полумягкий</span>
               </li>
             </ul>
-          </div>
-
-          <!-- Specs -->
-          <div class="mt-5">
-            <div class="section-header mb-2 px-0.5">ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ</div>
-            <div class="rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden text-[14.2px]">
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Материал</span>
-                <span class="font-semibold text-slate-900 dark:text-white">Полипропилен с УФ-добавками</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Шаг посадочного места</span>
-                <span class="font-semibold text-slate-900 dark:text-white">480 мм</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Ударная прочность</span>
-                <span class="font-semibold text-slate-900 dark:text-white">140 ДАН</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Гарантия цвета</span>
-                <span class="font-semibold text-slate-900 dark:text-white">5 лет</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2">
-                <span class="text-slate-500 dark:text-slate-400">Класс горючести</span>
-                <span class="font-semibold text-slate-900 dark:text-white">UL 94 V2</span>
-              </div>
-            </div>
           </div>
 
           <div class="mt-5">
             <div class="section-header mb-2 px-0.5">ИДЕАЛЬНО ДЛЯ</div>
             <p class="text-[14.8px] leading-snug text-slate-600 dark:text-slate-400">
-              Стадионов, спортивных комплексов, концертных площадок, 
+              Стадионов, спортивных комплексов, концертных площадок,
               учебных заведений и многоцелевых трибун.
             </p>
           </div>
@@ -798,11 +753,11 @@
           <!-- Buttons -->
           <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button onclick="requestOffer('arena2')" 
-                    class="modern-btn w-full px-6 py-3 bg-violet-700 hover:bg-violet-800 active:bg-violet-900 text-white text-sm font-semibold rounded-2xl shadow-sm flex items-center justify-center gap-2">
+                    class="modern-btn w-full px-6 py-3 bg-violet-700 hover:bg-violet-800 active:bg-violet-900 dark:bg-violet-600 dark:hover:bg-violet-500 dark:active:bg-violet-700 text-white text-sm font-semibold rounded-2xl shadow-sm flex items-center justify-center gap-2">
               Запросить коммерческое предложение
             </button>
             <button onclick="showMoreInfo('arena2')" 
-                    class="modern-btn w-full px-6 py-3 border border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 active:bg-slate-100 text-slate-700 dark:text-slate-200 font-semibold text-sm rounded-2xl flex items-center justify-center gap-2 transition-colors">
+                    class="modern-btn w-full px-6 py-3 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 active:bg-slate-100 dark:active:bg-slate-600 text-slate-700 dark:text-slate-100 font-semibold text-sm rounded-2xl flex items-center justify-center gap-2 transition-colors">
               Подробнее о продукте
             </button>
           </div>
@@ -867,66 +822,45 @@
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Максимально компактное в сложенном виде — больше пространства для прохода зрителей</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Модульность / замена сидений — очень высокая</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Модульная система — замена любого сидения за секунды без демонтажа конструкции</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Компактность в сложенном виде — лучшая на рынке</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Скрытый крепёж и корпус из стеклонаполненного полимера повышенной прочности</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Система направляющих — единая для всей серии АРЕНА</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Установка на единую систему направляющих вместе со всей линейкой АРЕНА</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Антивандальность — отличная</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">УФ-защита и стабилизация цвета с гарантией 5 лет</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Возможность полумягких накладок — есть</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Возможность подлокотников — базовый + полумягкий</span>
               </li>
             </ul>
-          </div>
-
-          <!-- Specs -->
-          <div class="mt-5">
-            <div class="section-header mb-2 px-0.5">ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ</div>
-            <div class="rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden text-[14.2px]">
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Материал</span>
-                <span class="font-semibold text-slate-900 dark:text-white">Полипропилен + стеклонаполненный полимер</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Шаг посадочного места</span>
-                <span class="font-semibold text-slate-900 dark:text-white">480 мм</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Ударная прочность</span>
-                <span class="font-semibold text-slate-900 dark:text-white">150 ДАН</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Гарантия цвета</span>
-                <span class="font-semibold text-slate-900 dark:text-white">5 лет</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2">
-                <span class="text-slate-500 dark:text-slate-400">Класс горючести</span>
-                <span class="font-semibold text-slate-900 dark:text-white">UL 94 V2</span>
-              </div>
-            </div>
           </div>
 
           <div class="mt-5">
             <div class="section-header mb-2 px-0.5">ИДЕАЛЬНО ДЛЯ</div>
             <p class="text-[14.8px] leading-snug text-slate-600">
-              Стадионов и спортивных арен, концертных залов, фанатских секторов, 
+              Стадионов и спортивных арен, концертных залов, фанатских секторов,
               мобильных и стационарных трибун.
             </p>
           </div>
@@ -950,11 +884,11 @@
           <!-- Buttons -->
           <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button onclick="requestOffer('arena')" 
-                    class="modern-btn w-full px-6 py-3 bg-violet-700 hover:bg-violet-800 active:bg-violet-900 text-white text-sm font-semibold rounded-2xl shadow-sm flex items-center justify-center gap-2">
+                    class="modern-btn w-full px-6 py-3 bg-violet-700 hover:bg-violet-800 active:bg-violet-900 dark:bg-violet-600 dark:hover:bg-violet-500 dark:active:bg-violet-700 text-white text-sm font-semibold rounded-2xl shadow-sm flex items-center justify-center gap-2">
               Запросить коммерческое предложение
             </button>
             <button onclick="showMoreInfo('arena')" 
-                    class="modern-btn w-full px-6 py-3 border border-slate-300 hover:border-slate-400 hover:bg-slate-50 active:bg-slate-100 text-slate-700 font-semibold text-sm rounded-2xl flex items-center justify-center gap-2 transition-colors">
+                    class="modern-btn w-full px-6 py-3 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 active:bg-slate-100 dark:active:bg-slate-600 text-slate-700 dark:text-slate-100 font-semibold text-sm rounded-2xl flex items-center justify-center gap-2 transition-colors">
               Подробнее о продукте
             </button>
           </div>
@@ -1019,66 +953,45 @@
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Центральное дренажное отверстие — постоянный слив воды</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Модульность / замена сидений — высокая</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Отсутствие зазоров — простота обслуживания и уборки</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Компактность в сложенном виде — лучшая на рынке</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Скрытая крепежная фурнитура — эстетичный внешний вид</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Система направляющих — совместима с АРЕНА</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">УФ-защита и стабилизация цвета — гарантия 5 лет</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Антивандальность — отличная</span>
               </li>
               <li class="advantage-item flex items-start gap-3 group">
                 <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 </div>
-                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Работа при температурах от −40°C до +60°C</span>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Возможность полумягких накладок — есть</span>
+              </li>
+              <li class="advantage-item flex items-start gap-3 group">
+                <div class="mt-0.5 shrink-0 w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-emerald-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                </div>
+                <span class="text-[14.8px] text-slate-700 dark:text-slate-300 leading-tight">Возможность подлокотников — базовый + полумягкий</span>
               </li>
             </ul>
-          </div>
-
-          <!-- Specs -->
-          <div class="mt-5">
-            <div class="section-header mb-2 px-0.5">ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ</div>
-            <div class="rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden text-[14.2px]">
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Материал</span>
-                <span class="font-semibold text-slate-900 dark:text-white">Полипропилен с УФ-добавками</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Размеры (В×Ш×Г)</span>
-                <span class="font-semibold text-slate-900 dark:text-white">428 × 480 × 750 мм</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Крепление</span>
-                <span class="font-semibold text-slate-900 dark:text-white">4 болта Ø8 мм</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2 border-b border-slate-100 dark:border-slate-700">
-                <span class="text-slate-500 dark:text-slate-400">Ударная прочность</span>
-                <span class="font-semibold text-slate-900 dark:text-white">150 ДАН</span>
-              </div>
-              <div class="spec-row flex justify-between items-center px-4 py-2">
-                <span class="text-slate-500 dark:text-slate-400">Гарантия цвета / Класс горючести</span>
-                <span class="font-semibold text-slate-900 dark:text-white">5 лет / UL 94 V2</span>
-              </div>
-            </div>
           </div>
 
           <div class="mt-5">
             <div class="section-header mb-2 px-0.5">ИДЕАЛЬНО ДЛЯ</div>
             <p class="text-[14.8px] leading-snug text-slate-600">
-              Фанатских секторов, зон за воротами, объектов с высокой антивандальной нагрузкой, 
+              Фанатских секторов, зон за воротами, объектов с высокой антивандальной нагрузкой,
               открытых стадионов и крытых арен.
             </p>
           </div>
@@ -1102,11 +1015,11 @@
           <!-- Buttons -->
           <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button onclick="requestOffer('iskra')" 
-                    class="modern-btn w-full px-6 py-3 bg-violet-700 hover:bg-violet-800 active:bg-violet-900 text-white text-sm font-semibold rounded-2xl shadow-sm flex items-center justify-center gap-2">
+                    class="modern-btn w-full px-6 py-3 bg-violet-700 hover:bg-violet-800 active:bg-violet-900 dark:bg-violet-600 dark:hover:bg-violet-500 dark:active:bg-violet-700 text-white text-sm font-semibold rounded-2xl shadow-sm flex items-center justify-center gap-2">
               Запросить коммерческое предложение
             </button>
             <button onclick="showMoreInfo('iskra')" 
-                    class="modern-btn w-full px-6 py-3 border border-slate-300 hover:border-slate-400 hover:bg-slate-50 active:bg-slate-100 text-slate-700 font-semibold text-sm rounded-2xl flex items-center justify-center gap-2 transition-colors">
+                    class="modern-btn w-full px-6 py-3 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 active:bg-slate-100 dark:active:bg-slate-600 text-slate-700 dark:text-slate-100 font-semibold text-sm rounded-2xl flex items-center justify-center gap-2 transition-colors">
               Подробнее о продукте
             </button>
           </div>
@@ -1200,6 +1113,94 @@
       }, 3800);
     }
 
+    function getProductSpecsHtml(product) {
+      const specsMap = {
+        luzhniki: [
+          ['Материал', 'Полимер'],
+          ['Ширина сидения', '~432 мм'],
+          ['Глубина в сложенном виде', '—'],
+          ['Рекомендуемый шаг', '450 мм'],
+          ['Ударная прочность', '150 ДАН'],
+          ['Гарантия цвета', '5 лет'],
+          ['Класс горючести', 'UL 94 V2'],
+          ['Температурный режим', '-40...+60°C'],
+          ['Прочностные свойства', '1 год'],
+          ['Дренаж', 'Есть'],
+          ['Видимый крепёж', 'Есть']
+        ],
+        arena1: [
+          ['Материал', 'Полимер'],
+          ['Ширина сидения', '~429 мм'],
+          ['Глубина в сложенном виде', '—'],
+          ['Рекомендуемый шаг', '450 мм'],
+          ['Ударная прочность', '150 ДАН'],
+          ['Гарантия цвета', '5 лет'],
+          ['Класс горючести', 'UL 94 V2'],
+          ['Температурный режим', '-40...+60°C'],
+          ['Прочностные свойства', '1 год'],
+          ['Дренаж', 'Есть'],
+          ['Видимый крепёж', 'Есть']
+        ],
+        arena2: [
+          ['Материал', 'Полиэтилен высокого давления'],
+          ['Ширина сидения', '~418 мм'],
+          ['Глубина в сложенном виде', '267 мм'],
+          ['Рекомендуемый шаг', '450–500 мм'],
+          ['Ударная прочность', '150 ДАН'],
+          ['Гарантия цвета', '5 лет'],
+          ['Класс горючести', 'UL 94 V2'],
+          ['Температурный режим', '-40...+60°C'],
+          ['Прочностные свойства', '1 год'],
+          ['Дренаж', 'Есть'],
+          ['Видимый крепёж', 'Минимальный']
+        ],
+        arena: [
+          ['Материал', 'Полипропилен + стеклонаполненный полимер'],
+          ['Ширина сидения', '~390 мм'],
+          ['Глубина в сложенном виде', '~340 мм'],
+          ['Рекомендуемый шаг', '450 мм'],
+          ['Ударная прочность', '150 ДАН'],
+          ['Гарантия цвета', '5 лет'],
+          ['Класс горючести', 'UL 94 V2'],
+          ['Температурный режим', '-40...+60°C'],
+          ['Прочностные свойства', '1 год'],
+          ['Дренаж', 'Есть'],
+          ['Видимый крепёж', 'Отсутствует']
+        ],
+        iskra: [
+          ['Материал', 'Полипропилен + стеклонаполненный полимер'],
+          ['Ширина сидения', '~390 мм'],
+          ['Глубина в сложенном виде', '~308 мм'],
+          ['Рекомендуемый шаг', '450 мм'],
+          ['Ударная прочность', '150 ДАН'],
+          ['Гарантия цвета', '5 лет'],
+          ['Класс горючести', 'UL 94 V2'],
+          ['Температурный режим', '-40...+60°C'],
+          ['Прочностные свойства', '1 год'],
+          ['Дренаж', 'Центральный'],
+          ['Видимый крепёж', 'Отсутствует']
+        ]
+      };
+
+      const specs = specsMap[product] || specsMap.luzhniki;
+      const rows = specs.map(([label, value], index) => {
+        const borderClass = index < specs.length - 1 ? ' border-b border-slate-100 dark:border-slate-700' : '';
+        return `
+              <div class="spec-row flex justify-between items-center px-4 py-2${borderClass}">
+                <span class="text-slate-500 dark:text-slate-400">${label}</span>
+                <span class="font-semibold text-slate-900 dark:text-white">${value}</span>
+              </div>`;
+      }).join('');
+
+      return `
+            <div class="pt-2">
+              <div class="section-header mb-2 px-0.5">ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ</div>
+              <div class="rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden text-[14.2px]">
+                ${rows}
+              </div>
+            </div>`;
+    }
+
     // Show more info modal
     function showMoreInfo(product) {
       let title = 'ЛУЖНИКИ';
@@ -1224,11 +1225,11 @@
       modal.innerHTML = `
         <div onclick="event.target.remove()" class="absolute inset-0"></div>
         <div onclick="event.stopImmediatePropagation()" 
-             class="relative bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-8 shadow-2xl">
+             class="relative bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto p-8 shadow-2xl">
           <div class="flex justify-between items-start mb-5">
             <div>
-              <div class="font-semibold text-2xl tracking-tight">${title}</div>
-              <div class="text-violet-600 dark:text-violet-400 text-sm font-medium tracking-wide">${subtitle}</div>
+              <div class="font-semibold text-2xl tracking-tight text-slate-900 dark:text-white">${title}</div>
+              <div class="text-violet-600 dark:text-violet-300 text-sm font-medium tracking-wide">${subtitle}</div>
             </div>
             <button onclick="this.closest('.fixed').remove()" 
                     class="w-9 h-9 flex items-center justify-center text-slate-400 dark:text-slate-500 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800 -mr-1">
@@ -1236,7 +1237,7 @@
             </button>
           </div>
           
-          <div class="space-y-4 text-[14.5px] text-slate-600 dark:text-slate-400 leading-relaxed">
+          <div class="space-y-4 text-[14.5px] text-slate-600 dark:text-slate-300 leading-relaxed">
             ${product === 'arena' ? 
               `<p>АРЕНА 3 — компактная модульная система сидений, созданная с применением технологии газового литья под давлением.</p>
                <p>Предназначена для профессиональных стадионов, арен и многофункциональных пространств. Обеспечивает максимальную плотность посадки при сохранении комфорта и безопасности.</p>` : 
@@ -1252,50 +1253,52 @@
               `<p>ЛУЖНИКИ — легендарное сидение, разработанное специально для знаменитого стадиона Лужники.</p>
                <p>Классическое решение, проверенное временем на крупнейших объектах. Высокая прочность и простота эксплуатации.</p>`
             }
+
+            ${getProductSpecsHtml(product)}
             
             <div class="pt-2">
-              <div class="text-xs font-semibold tracking-[1px] text-slate-400 mb-2">ДОСТУПНЫЕ ОПЦИИ ЦВЕТОВ</div>
+              <div class="text-xs font-semibold tracking-[1px] text-slate-400 dark:text-slate-400 mb-2">ДОСТУПНЫЕ ОПЦИИ ЦВЕТОВ</div>
               <div class="flex flex-wrap gap-2 text-xs">
                 ${product === 'arena' ? 
-                  `<div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Фиолетовый</div>
-                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Красный</div>
-                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Синий</div>
-                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Серый</div>` :
+                  `<div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Фиолетовый</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Красный</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Синий</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Серый</div>` :
                   product === 'iskra' ?
-                  `<div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Красный (RAL 3020)</div>
-                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Синий</div>
-                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Серый</div>
-                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Зелёный</div>` :
+                  `<div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Красный (RAL 3020)</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Синий</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Серый</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Зелёный</div>` :
                   product === 'arena2' ?
-                  `<div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Красный</div>
-                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Синий</div>
-                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Серый</div>
-                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Оранжевый</div>` :
+                  `<div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Красный</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Синий</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Серый</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Оранжевый</div>` :
                   product === 'arena1' ?
-                  `<div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Красный</div>
-                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Синий</div>
-                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Зелёный</div>
-                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Серый</div>` :
-                  `<div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Красный</div>
-                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Синий</div>
-                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Жёлтый</div>
-                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 dark:text-slate-300 rounded-2xl text-slate-700">Серый</div>`
+                  `<div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Красный</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Синий</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Зелёный</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Серый</div>` :
+                  `<div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Красный</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Синий</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Жёлтый</div>
+                   <div class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-700 dark:text-slate-200">Серый</div>`
                 }
               </div>
             </div>
           </div>
 
-          <div class="pt-6 mt-6 border-t flex flex-col gap-3">
+          <div class="pt-6 mt-6 border-t border-slate-200 dark:border-slate-700 flex flex-col gap-3">
             <div class="flex gap-3">
               <button onclick="this.closest('.fixed').remove(); viewSpec('${product}');" 
-                      class="flex-1 py-3 text-sm font-semibold bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 dark:text-slate-200 rounded-2xl flex items-center justify-center gap-2">
+                      class="flex-1 py-3 text-sm font-semibold bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-100 rounded-2xl flex items-center justify-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
                 Смотреть спецификацию
               </button>
               <button onclick="downloadSpec('${product}');" 
-                      class="flex-1 py-3 text-sm font-semibold bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 dark:text-slate-200 rounded-2xl flex items-center justify-center gap-2">
+                      class="flex-1 py-3 text-sm font-semibold bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-100 rounded-2xl flex items-center justify-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
@@ -1303,7 +1306,7 @@
               </button>
             </div>
             <button onclick="this.closest('.fixed').remove(); requestOffer('${product}')" 
-                    class="w-full py-3 text-sm font-semibold bg-violet-700 hover:bg-violet-800 text-white rounded-2xl">
+                    class="w-full py-3 text-sm font-semibold bg-violet-700 hover:bg-violet-800 dark:bg-violet-600 dark:hover:bg-violet-500 text-white rounded-2xl">
               Запросить КП
             </button>
           </div>
