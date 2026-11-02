@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /adds/
+Disallow: /tables/
+
+User-agent: Yandex
+Allow: /
+Disallow: /adds/
+Disallow: /tables/
+
+Sitemap: https://fan-tribune.ru/sitemap.xml
