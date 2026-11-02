@@ -2620,7 +2620,7 @@ ym(113363796, 'init', {
 
           <button onclick="this.closest('.fixed').remove(); showQuiz();"
                   class="w-full mb-4 py-4 bg-violet-600 hover:bg-violet-500 active:bg-violet-700 text-white font-semibold rounded-2xl text-[15px] transition-colors min-h-[48px]">
-            Заполнить заявку за 1 минуту →
+            Оставить заявку →
           </button>
 
           <div class="text-center text-xs text-slate-400 dark:text-slate-500 mb-3">или свяжитесь напрямую:</div>
@@ -3089,7 +3089,7 @@ ym(113363796, 'init', {
 
       function showQuiz() {
         if (typeof ym === "function") ym(113363796, "reachGoal", "quiz_start");
-        quizState = { step: 0, seats: "", object: "", model: "", name: "", phone: "" };
+        quizState = { step: 3, seats: "", object: "", model: "", name: "", phone: "" };
         var modal = document.createElement("div");
         modal.id = "quiz-modal";
         modal.className = "fixed inset-0 z-[110] flex items-center justify-center bg-black/60 p-4";
@@ -3188,11 +3188,18 @@ ym(113363796, 'init', {
           "🏟 Объект: " + quizState.object + "\n" +
           "🪑 Модель: " + quizState.model;
 
+        var plainText = "Новая заявка с сайта fan-tribune.ru\nИмя: " + (name || "—") + "\nТелефон: " + phone + "\nКоличество мест: " + quizState.seats + "\nОбъект: " + quizState.object + "\nМодель: " + quizState.model;
+        // Дубль на e-mail (FormSubmit)
+        fetch("https://formsubmit.co/ajax/fantribunesport@gmail.com", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({ _subject: "Заявка с fan-tribune.ru", _captcha: "false", message: plainText })
+        }).catch(function(){});
         fetch("https://api.telegram.org/bot" + FT_TG_TOKEN + "/sendMessage", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ chat_id: FT_TG_CHAT_ID, text: text, parse_mode: "HTML" }),
-          signal: (window.AbortSignal && AbortSignal.timeout) ? AbortSignal.timeout(12000) : undefined
+          signal: (window.AbortSignal && AbortSignal.timeout) ? AbortSignal.timeout(8000) : undefined
         }).then(function(r){ return r.json(); }).then(function(res){
           if (typeof ym === "function") ym(113363796, "reachGoal", "lead_submit");
           var body = document.getElementById("quiz-body");
