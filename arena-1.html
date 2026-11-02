@@ -432,7 +432,7 @@
       }
       function nextSlide() { showSlide(currentIndex + 1); }
       function prevSlide() { showSlide(currentIndex - 1); }
-      window.addEventListener("load", renderSlides);
+      if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", renderSlides); } else { renderSlides(); }
     </script>
 
     <script>
