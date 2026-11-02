@@ -19,52 +19,52 @@
 
     <!-- Schema.org -->
     <script type="application/ld+json">
-    {{
+    {
       "@context": "https://schema.org",
       "@type": "Product",
       "name": "Сидение АРЕНА 2 для трибун и стадионов",
       "description": "АРЕНА 2 — модульное сидение для трибун и арен: полиэтилен высокого давления, глубина в сложенном виде 267 мм, полумягкие накладки, подлокотники. FIFA compliant. Запросите КП.",
       "image": "https://fan-tribune.ru/assets/products/arena-2/arena2_mock_1.png",
       "url": "https://fan-tribune.ru/arena-2.html",
-      "brand": {{ "@type": "Brand", "name": "Fan Tribune" }},
-      "manufacturer": {{ "@type": "Organization", "name": "Fan Tribune", "url": "https://fan-tribune.ru/" }},
-      "offers": {{
+      "brand": { "@type": "Brand", "name": "Fan Tribune" },
+      "manufacturer": { "@type": "Organization", "name": "Fan Tribune", "url": "https://fan-tribune.ru/" },
+      "offers": {
         "@type": "Offer",
         "priceCurrency": "RUB",
         "availability": "https://schema.org/InStock",
         "url": "https://fan-tribune.ru/arena-2.html",
         "description": "Цена по запросу — расчёт под проект"
-      }}
-    }}
+      }
+    }
     </script>
     <script type="application/ld+json">
-    {{
+    {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {{ "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://fan-tribune.ru/" }},
-        {{ "@type": "ListItem", "position": 2, "name": "Продукция", "item": "https://fan-tribune.ru/#products" }},
-        {{ "@type": "ListItem", "position": 3, "name": "АРЕНА 2", "item": "https://fan-tribune.ru/arena-2.html" }}
+        { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://fan-tribune.ru/" },
+        { "@type": "ListItem", "position": 2, "name": "Продукция", "item": "https://fan-tribune.ru/#products" },
+        { "@type": "ListItem", "position": 3, "name": "АРЕНА 2", "item": "https://fan-tribune.ru/arena-2.html" }
       ]
-    }}
+    }
     </script>
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
-    (function(m, e, t, r, i, k, a) {{
-        m[i] = m[i] || function() {{ (m[i].a = m[i].a || []).push(arguments) }};
+    (function(m, e, t, r, i, k, a) {
+        m[i] = m[i] || function() { (m[i].a = m[i].a || []).push(arguments) };
         m[i].l = 1 * new Date();
-        for (var j = 0; j < document.scripts.length; j++) {{
-            if (document.scripts[j].src === r) {{ return; }}
-        }}
+        for (var j = 0; j < document.scripts.length; j++) {
+            if (document.scripts[j].src === r) { return; }
+        }
         k = e.createElement(t), a = e.getElementsByTagName(t)[0],
         k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
-    }})(window, document, 'script', 'https://mc.webvisor.org/metrika/tag_ww.js?id=113363796', 'ym');
+    })(window, document, 'script', 'https://mc.webvisor.org/metrika/tag_ww.js?id=113363796', 'ym');
 
-    ym(113363796, 'init', {{
+    ym(113363796, 'init', {
         ssr: true, webvisor: true, trackHash: true, clickmap: true,
         ecommerce: "dataLayer", referrer: document.referrer, url: location.href,
         accurateTrackBounce: true, trackLinks: true
-    }});
+    });
     </script>
     <!-- /Yandex.Metrika counter -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -72,42 +72,42 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap");
 
-      body {{
+      body {
         font-family: "Inter", system_ui, sans-serif;
         background-color: #f8fafc;
-      }}
-      .dark body {{ background-color: #0f172a; }}
-      .font-display {{
+      }
+      .dark body { background-color: #0f172a; }
+      .font-display {
         font-family: "Space Grotesk", "Inter", system_ui, sans-serif;
         font-feature-settings: "ss02";
-      }}
-      .product-card {{
+      }
+      .product-card {
         box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.15), 0 10px 10px -6px rgb(0 0 0 / 0.1);
-      }}
-      .dark .product-card {{
+      }
+      .dark .product-card {
         box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4), 0 10px 10px -6px rgb(0 0 0 / 0.3);
-      }}
-      .product-card .product-carousel {{ aspect-ratio: 16 / 9; }}
-      .section-header {{
+      }
+      .product-card .product-carousel { aspect-ratio: 16 / 9; }
+      .section-header {
         font-size: 0.75rem; letter-spacing: 0.08em; font-weight: 600; color: #64748b;
-      }}
-      .spec-row {{ transition: background-color 0.1s ease; }}
-      .spec-row:hover {{ background-color: #f8fafc; }}
-      .dark .spec-row:hover {{ background-color: #1e293b; }}
-      .dark .spec-row {{ border-color: #334155; }}
-      .advantage-item {{ transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1); }}
-      .advantage-item:hover {{ transform: translateX(2px); }}
-      .modern-btn {{ transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }}
-      .modern-btn:hover {{ transform: translateY(-1px); }}
-      .modern-btn:active {{ transform: translateY(0); }}
-      .nav-link {{ transition: color 0.1s ease; }}
-      .nav-link:hover {{ color: #4c1d95; }}
-      .dark .nav-link:hover {{ color: #a5b4fc; }}
-      .related-card {{ transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease; }}
-      .related-card:hover {{
+      }
+      .spec-row { transition: background-color 0.1s ease; }
+      .spec-row:hover { background-color: #f8fafc; }
+      .dark .spec-row:hover { background-color: #1e293b; }
+      .dark .spec-row { border-color: #334155; }
+      .advantage-item { transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+      .advantage-item:hover { transform: translateX(2px); }
+      .modern-btn { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+      .modern-btn:hover { transform: translateY(-1px); }
+      .modern-btn:active { transform: translateY(0); }
+      .nav-link { transition: color 0.1s ease; }
+      .nav-link:hover { color: #4c1d95; }
+      .dark .nav-link:hover { color: #a5b4fc; }
+      .related-card { transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease; }
+      .related-card:hover {
         transform: translateY(-4px);
         box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-      }}
+      }
     </style>
   </head>
   <body class="min-h-screen">
@@ -389,55 +389,55 @@
 
     <script>
       // Theme
-      tailwind.config = {{ darkMode: "class" }};
-      function initTheme() {{
-        if (localStorage.getItem("theme") === "dark") {{
+      tailwind.config = { darkMode: "class" };
+      function initTheme() {
+        if (localStorage.getItem("theme") === "dark") {
           document.documentElement.classList.add("dark");
-        }}
-      }}
-      function toggleTheme() {{
+        }
+      }
+      function toggleTheme() {
         const isDark = document.documentElement.classList.toggle("dark");
         localStorage.setItem("theme", isDark ? "dark" : "light");
-      }}
+      }
       initTheme();
 
       // Gallery
       var images = ["assets/products/arena-2/arena2_mock_1.png", "assets/products/arena-2/arena2_mock_2.png", "assets/products/arena-2/arena2_mock_3.png", "assets/products/arena-2/photo_arena_2_1.jpg", "assets/products/arena-2/photo_arena_2_2.jpg"];
       var currentIndex = 0;
-      function renderSlides() {{
+      function renderSlides() {
         var container = document.getElementById("slides-container");
         if (!container) return;
         container.innerHTML = "";
-        images.forEach(function(src, index) {{
+        images.forEach(function(src, index) {
           var slide = document.createElement("div");
           slide.className = "absolute inset-0 transition-opacity duration-300 " + (index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0");
           slide.innerHTML = '<img src="' + src + '" alt="АРЕНА 2 — фото ' + (index + 1) + '" class="w-full h-full object-cover">' +
             '<div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/40 to-transparent"></div>';
           container.appendChild(slide);
-        }});
+        });
         var counter = document.getElementById("slide-counter");
         if (counter) counter.textContent = (currentIndex + 1) + " / " + images.length;
-      }}
-      function showSlide(index) {{
+      }
+      function showSlide(index) {
         currentIndex = (index + images.length) % images.length;
         var container = document.getElementById("slides-container");
         var slides = container.children;
-        for (var i = 0; i < slides.length; i++) {{
+        for (var i = 0; i < slides.length; i++) {
           slides[i].classList.remove("opacity-100", "z-10");
           slides[i].classList.add("opacity-0", "z-0");
-        }}
+        }
         slides[currentIndex].classList.remove("opacity-0", "z-0");
         slides[currentIndex].classList.add("opacity-100", "z-10");
         document.getElementById("slide-counter").textContent = (currentIndex + 1) + " / " + images.length;
-      }}
-      function nextSlide() {{ showSlide(currentIndex + 1); }}
-      function prevSlide() {{ showSlide(currentIndex - 1); }}
+      }
+      function nextSlide() { showSlide(currentIndex + 1); }
+      function prevSlide() { showSlide(currentIndex - 1); }
       window.addEventListener("load", renderSlides);
     </script>
 
     <script>
       // Yandex Metrika goals: phone / email / PDF
-      document.addEventListener("click", function (e) {{
+      document.addEventListener("click", function (e) {
         if (typeof ym !== "function") return;
         var a = e.target.closest && e.target.closest("a[href]");
         if (!a) return;
@@ -445,7 +445,7 @@
         if (href.indexOf("tel:") === 0) ym(113363796, "reachGoal", "phone_click");
         else if (href.indexOf("mailto:") === 0) ym(113363796, "reachGoal", "email_click");
         else if (/\.pdf($|[?#])/i.test(href)) ym(113363796, "reachGoal", "pdf_download");
-      }});
+      });
     </script>
 
     <script>
@@ -454,7 +454,7 @@
       var FT_TG_CHAT_ID = "379249967";
       var FT_PRODUCT = "АРЕНА 2";
 
-      function showGlobalRequest() {{
+      function showGlobalRequest() {
         if (typeof ym === "function") ym(113363796, "reachGoal", "kp_open");
         var modal = document.createElement("div");
         modal.className = "fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4";
@@ -480,29 +480,29 @@
           '</div>';
         document.body.appendChild(modal);
         if (typeof ym === "function") ym(113363796, "reachGoal", "quiz_start");
-      }}
+      }
 
-      function submitLead(btn) {{
+      function submitLead(btn) {
         var name = (document.getElementById("lead-name").value || "").trim();
         var phone = (document.getElementById("lead-phone").value || "").trim();
         var err = document.getElementById("lead-error");
-        if (phone.replace(/\D/g, "").length < 10) {{
+        if (phone.replace(/\D/g, "").length < 10) {
           err.textContent = "Укажите телефон, чтобы мы могли связаться с вами";
           err.classList.remove("hidden");
           return;
-        }}
+        }
         var plainText = "Новая заявка с сайта fan-tribune.ru\nИмя: " + (name || "—") + "\nТелефон: " + phone + "\nМодель: " + FT_PRODUCT + "\nСтраница: arena-2.html";
-        fetch("https://formsubmit.co/ajax/magicgardenn5@yandex.ru", {{
+        fetch("https://formsubmit.co/ajax/magicgardenn5@yandex.ru", {
           method: "POST",
-          headers: {{ "Content-Type": "application/json", "Accept": "application/json" }},
-          body: JSON.stringify({{ _subject: "Заявка с fan-tribune.ru — " + FT_PRODUCT, _captcha: "false", message: plainText }})
-        }}).catch(function(){{}});
-        fetch("https://api.telegram.org/bot" + FT_TG_TOKEN + "/sendMessage", {{
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({ _subject: "Заявка с fan-tribune.ru — " + FT_PRODUCT, _captcha: "false", message: plainText })
+        }).catch(function(){});
+        fetch("https://api.telegram.org/bot" + FT_TG_TOKEN + "/sendMessage", {
           method: "POST",
-          headers: {{ "Content-Type": "application/json" }},
-          body: JSON.stringify({{ chat_id: FT_TG_CHAT_ID, text: "🔔 <b>Заявка — " + FT_PRODUCT + "</b>\n\n👤 " + (name || "—") + "\n📞 " + phone + "\n📄 fan-tribune.ru/arena-2.html", parse_mode: "HTML" }}),
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: FT_TG_CHAT_ID, text: "🔔 <b>Заявка — " + FT_PRODUCT + "</b>\n\n👤 " + (name || "—") + "\n📞 " + phone + "\n📄 fan-tribune.ru/arena-2.html", parse_mode: "HTML" }),
           signal: (window.AbortSignal && AbortSignal.timeout) ? AbortSignal.timeout(8000) : undefined
-        }}).then(function(r){{ return r.json(); }}).then(function(res){{
+        }).then(function(r){ return r.json(); }).then(function(res){
           if (typeof ym === "function") ym(113363796, "reachGoal", "lead_submit");
           var modalContent = btn.closest(".relative");
           modalContent.innerHTML = '<div class="text-center py-8">' +
@@ -512,11 +512,11 @@
             '<div class="text-xl font-semibold text-slate-900 dark:text-white mb-2">Заявка отправлена!</div>' +
             '<div class="text-sm text-slate-500 dark:text-slate-400">Менеджер свяжется с вами в течение рабочего дня.</div>' +
           '</div>';
-        }}).catch(function(){{
+        }).catch(function(){
           err.textContent = "Не удалось отправить. Позвоните нам: +7 991 740 93 25";
           err.classList.remove("hidden");
-        }});
-      }}
+        });
+      }
     </script>
   </body>
 </html>
