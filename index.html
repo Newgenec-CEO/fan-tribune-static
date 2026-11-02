@@ -2618,6 +2618,13 @@ ym(113363796, 'init', {
           </div>
           <p class="text-slate-600 dark:text-slate-300 text-sm mb-6">Наш менеджер свяжется с вами в течение рабочего дня.</p>
 
+          <button onclick="this.closest('.fixed').remove(); showQuiz();"
+                  class="w-full mb-4 py-4 bg-violet-600 hover:bg-violet-500 active:bg-violet-700 text-white font-semibold rounded-2xl text-[15px] transition-colors min-h-[48px]">
+            Заполнить заявку за 1 минуту →
+          </button>
+
+          <div class="text-center text-xs text-slate-400 dark:text-slate-500 mb-3">или свяжитесь напрямую:</div>
+
           <div class="space-y-3">
             <a href="tel:+79917409325"
                class="flex items-center gap-3 rounded-2xl border border-slate-200 dark:border-slate-700 px-4 py-3.5 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors group">
@@ -3071,6 +3078,135 @@ ym(113363796, 'init', {
         else if (href.indexOf("mailto:") === 0) ym(113363796, "reachGoal", "email_click");
         else if (/\.pdf($|[?#])/i.test(href)) ym(113363796, "reachGoal", "pdf_download");
       });
+    </script>
+  
+    <script>
+      // ===== Квиз-форма заявки (этап 2) =====
+      var FT_TG_TOKEN = "9242360161:AAHorWNkD1UyFcG19v37qWqr807o42LwJFQ";
+      var FT_TG_CHAT_ID = "682922952";
+
+      var quizState = { step: 0, seats: "", object: "", model: "", name: "", phone: "" };
+
+      function showQuiz() {
+        if (typeof ym === "function") ym(113363796, "reachGoal", "quiz_start");
+        quizState = { step: 0, seats: "", object: "", model: "", name: "", phone: "" };
+        var modal = document.createElement("div");
+        modal.id = "quiz-modal";
+        modal.className = "fixed inset-0 z-[110] flex items-center justify-center bg-black/60 p-4";
+        modal.innerHTML =
+          '<div onclick="this.closest(\'.fixed\').remove()" class="absolute inset-0"></div>' +
+          '<div onclick="event.stopImmediatePropagation()" class="relative bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-8 shadow-2xl">' +
+            '<div class="flex justify-between items-start mb-2">' +
+              '<div class="font-semibold text-2xl tracking-tight text-slate-900 dark:text-white pr-4">Расчёт проекта за 1 минуту</div>' +
+              '<button onclick="this.closest(\'.fixed\').remove()" aria-label="Закрыть" class="w-9 h-9 flex-shrink-0 flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800 -mr-1">' +
+                '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" /></svg>' +
+              '</button>' +
+            '</div>' +
+            '<div id="quiz-body"></div>' +
+          '</div>';
+        document.body.appendChild(modal);
+        renderQuizStep();
+      }
+
+      function quizOptionBtn(label, fn) {
+        return '<button onclick="' + fn + '" class="w-full text-left rounded-2xl border border-slate-200 dark:border-slate-700 px-4 py-3.5 hover:bg-violet-50 dark:hover:bg-slate-800 hover:border-violet-300 dark:hover:border-violet-600 transition-colors text-[15px] font-medium text-slate-800 dark:text-slate-100 min-h-[48px]">' + label + '</button>';
+      }
+
+      function renderQuizStep() {
+        var body = document.getElementById("quiz-body");
+        if (!body) return;
+        var progress = '<div class="flex gap-1.5 mb-6">' + [0,1,2,3].map(function(i){
+          return '<div class="h-1 flex-1 rounded-full ' + (i <= quizState.step ? 'bg-violet-600' : 'bg-slate-200 dark:bg-slate-700') + '"></div>';
+        }).join('') + '</div>';
+
+        if (quizState.step === 0) {
+          body.innerHTML = progress +
+            '<div class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-3">Шаг 1 из 4</div>' +
+            '<div class="text-lg font-semibold text-slate-900 dark:text-white mb-4">Сколько посадочных мест нужно?</div>' +
+            '<div class="space-y-2.5">' +
+              quizOptionBtn("До 500 мест", "quizAnswer('seats','До 500')") +
+              quizOptionBtn("500 – 2 000 мест", "quizAnswer('seats','500–2000')") +
+              quizOptionBtn("2 000 – 10 000 мест", "quizAnswer('seats','2000–10000')") +
+              quizOptionBtn("Более 10 000 мест", "quizAnswer('seats','10000+')") +
+            '</div>';
+        } else if (quizState.step === 1) {
+          body.innerHTML = progress +
+            '<div class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-3">Шаг 2 из 4</div>' +
+            '<div class="text-lg font-semibold text-slate-900 dark:text-white mb-4">Тип объекта</div>' +
+            '<div class="space-y-2.5">' +
+              quizOptionBtn("Стадион / арена", "quizAnswer('object','Стадион/арена')") +
+              quizOptionBtn("Школа / СШОР / вуз", "quizAnswer('object','Школа/СШОР/вуз')") +
+              quizOptionBtn("Муниципальная трибуна", "quizAnswer('object','Муниципальная трибуна')") +
+              quizOptionBtn("Концертная площадка", "quizAnswer('object','Концертная площадка')") +
+              quizOptionBtn("Фан-сектор", "quizAnswer('object','Фан-сектор')") +
+              quizOptionBtn("Другое", "quizAnswer('object','Другое')") +
+            '</div>';
+        } else if (quizState.step === 2) {
+          body.innerHTML = progress +
+            '<div class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-3">Шаг 3 из 4</div>' +
+            '<div class="text-lg font-semibold text-slate-900 dark:text-white mb-4">Какая модель интересует?</div>' +
+            '<div class="space-y-2.5">' +
+              quizOptionBtn("Помогите с выбором", "quizAnswer('model','Нужна консультация')") +
+              quizOptionBtn("ЛУЖНИКИ", "quizAnswer('model','ЛУЖНИКИ')") +
+              quizOptionBtn("АРЕНА 1", "quizAnswer('model','АРЕНА 1')") +
+              quizOptionBtn("АРЕНА 2", "quizAnswer('model','АРЕНА 2')") +
+              quizOptionBtn("АРЕНА 3", "quizAnswer('model','АРЕНА 3')") +
+              quizOptionBtn("ИСКРА (премиум)", "quizAnswer('model','ИСКРА')") +
+            '</div>';
+        } else {
+          body.innerHTML = progress +
+            '<div class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-3">Шаг 4 из 4</div>' +
+            '<div class="text-lg font-semibold text-slate-900 dark:text-white mb-1">Куда отправить расчёт?</div>' +
+            '<div class="text-sm text-slate-500 dark:text-slate-400 mb-4">Менеджер свяжется в течение рабочего дня.</div>' +
+            '<input id="quiz-name" type="text" placeholder="Ваше имя" class="w-full rounded-2xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-3.5 mb-3 text-[15px] text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500 min-h-[48px]" />' +
+            '<input id="quiz-phone" type="tel" placeholder="+7 ___ ___-__-__" class="w-full rounded-2xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-3.5 mb-4 text-[15px] text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500 min-h-[48px]" />' +
+            '<button onclick="submitQuiz()" class="w-full py-4 bg-violet-600 hover:bg-violet-500 active:bg-violet-700 text-white font-semibold rounded-2xl text-[15px] transition-colors min-h-[48px]">Получить расчёт</button>' +
+            '<div class="text-[11px] text-slate-400 dark:text-slate-500 mt-3 text-center">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</div>' +
+            '<div id="quiz-error" class="hidden text-sm text-red-500 mt-3 text-center"></div>';
+        }
+      }
+
+      function quizAnswer(field, value) {
+        quizState[field] = value;
+        quizState.step += 1;
+        renderQuizStep();
+      }
+
+      function submitQuiz() {
+        var name = (document.getElementById("quiz-name").value || "").trim();
+        var phone = (document.getElementById("quiz-phone").value || "").trim();
+        var err = document.getElementById("quiz-error");
+        if (phone.replace(/\D/g, "").length < 10) {
+          err.textContent = "Укажите телефон, чтобы мы могли связаться с вами";
+          err.classList.remove("hidden");
+          return;
+        }
+        var text = "🔔 <b>Новая заявка с сайта fan-tribune.ru</b>\n\n" +
+          "👤 Имя: " + (name || "—") + "\n" +
+          "📞 Телефон: " + phone + "\n" +
+          "💺 Количество мест: " + quizState.seats + "\n" +
+          "🏟 Объект: " + quizState.object + "\n" +
+          "🪑 Модель: " + quizState.model;
+
+        fetch("https://api.telegram.org/bot" + FT_TG_TOKEN + "/sendMessage", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: FT_TG_CHAT_ID, text: text, parse_mode: "HTML" })
+        }).then(function(r){ return r.json(); }).then(function(res){
+          if (typeof ym === "function") ym(113363796, "reachGoal", "lead_submit");
+          var body = document.getElementById("quiz-body");
+          body.innerHTML = '<div class="text-center py-8">' +
+            '<div class="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 dark:bg-green-900/40 flex items-center justify-center">' +
+              '<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>' +
+            '</div>' +
+            '<div class="text-xl font-semibold text-slate-900 dark:text-white mb-2">Заявка отправлена!</div>' +
+            '<div class="text-sm text-slate-500 dark:text-slate-400">Менеджер свяжется с вами в течение рабочего дня.</div>' +
+          '</div>';
+        }).catch(function(){
+          err.textContent = "Не удалось отправить. Позвоните нам: +7 991 740 93 25";
+          err.classList.remove("hidden");
+        });
+      }
     </script>
   </body>
 </html>
