@@ -3191,7 +3191,8 @@ ym(113363796, 'init', {
         fetch("https://api.telegram.org/bot" + FT_TG_TOKEN + "/sendMessage", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ chat_id: FT_TG_CHAT_ID, text: text, parse_mode: "HTML" })
+          body: JSON.stringify({ chat_id: FT_TG_CHAT_ID, text: text, parse_mode: "HTML" }),
+          signal: (window.AbortSignal && AbortSignal.timeout) ? AbortSignal.timeout(12000) : undefined
         }).then(function(r){ return r.json(); }).then(function(res){
           if (typeof ym === "function") ym(113363796, "reachGoal", "lead_submit");
           var body = document.getElementById("quiz-body");
