@@ -1,0 +1,33 @@
+{
+	auto_https off
+	admin off
+}
+
+:80 {
+	root * /srv
+	encode gzip zstd
+
+	@404 path /404.html
+	rewrite @404 /404-page
+
+	# --- Security headers ---
+	header {
+		X-Content-Type-Options nosniff
+		X-Frame-Options DENY
+		Referrer-Policy strict-origin-when-cross-origin
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		-Server
+	}
+
+	# --- Soft-404 fix: несуществующие пути -> 404.html с кодом 404 ---
+	@notFound not file
+	handle @notFound {
+		rewrite * /404.html
+	}
+
+	# /404.html должен отдаваться с кодом 404, а не 200
+	@is404 path /404.html
+	respond @is404 404
+
+	file_server
+}
